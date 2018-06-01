@@ -13,14 +13,14 @@
           <span>III</span>
         </div>
         <div id="title-welcome" class="title-welcome emergence-title-welcome">
-          <span>ПОЛУУСТАВ</span>
+          <span>Π Θ Λ Ú Ỵ C T Ᾱ ß</span>
         </div>
       </div>
     </div>
     <div class="down-rooms">
       <div class="current-room">
         <div id="current-room-title" class="current-room-title">
-          <span>ПОЛУУСТАВ</span>
+          <span>Π Θ Λ Ú Ỵ C T Ᾱ ß</span>
         </div>
       </div>
       <div class="help-message" v-bind:class="{ 'help-message-active': help_message.visible }">
@@ -28,27 +28,27 @@
       </div>
       <div class="rooms">
         <div>
-          <span class="num-room">I</span>
+          <router-link to='/hallofIntro' class="num-room">I</router-link>
             <div class="title-room">
-              <span>ЗАСТАВКА</span>
+              <span>Ꙁ Ѧ C Т Ã Ꞗ K Ꙙ</span>
             </div>
         </div>
         <div>
-          <span class="num-room">II</span>
+          <router-link to='/hallofLetter' class="num-room">II</router-link>
           <div class="title-room">
-            <span>БУКВИЦА</span>
+            <span>Б Ӯ ₭ Ḇ И Ꙡ Ѧ</span>
           </div>
         </div>
         <div>
-          <span class="num-room emergence-num-room-active">III</span>
+          <router-link to='/hallofText' class="num-room emergence-num-room-active">III</router-link>
           <div class="title-room">
-            <span>ПОЛУУСТАВ</span>
+            <span>Π Θ Λ Ú Ỵ C T Ᾱ ß</span>
           </div>
         </div>
         <div>
-          <span class="num-room">IV</span>
+          <router-link to='#' class="num-room">IV</router-link>
           <div class="title-room">
-            <span>КОНЦОВКА</span>
+            <span>K O Ħ Ꙡ Ꝋ β Ǩ Ѧ</span>
           </div>
         </div>
       </div>
@@ -360,14 +360,16 @@ export default {
     padding: 0px 45px;
   }
 
-  .rooms span{
+  .rooms a, .rooms span{
     color: #9D9D9D;
     font-size: 13px;
     font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
     user-select: none;
   }
 
-  span.num-room:hover + .title-room{
+  a.num-room:hover + .title-room{
     opacity: 1;
   }
 
@@ -378,8 +380,8 @@ export default {
   .rooms .title-room{
     position: absolute;
     bottom: 35px;
-    left: 15px;
-    width: 90px;
+    left: 0px;
+    width: 120px;
     transition-duration: 1s;
     transition-timing-function: ease;
     text-align: center;
