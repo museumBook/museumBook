@@ -294,7 +294,7 @@ export default {
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
-    cursor: pointer;
+    cursor: url(/static/img/cursor/pointer.png) 30 30, auto;
     user-select: none;
   }
 
@@ -334,7 +334,7 @@ export default {
     bottom: 40px;
     width: 28px;
     height: 5px;
-    cursor: pointer;
+    cursor: url(/static/img/cursor/pointer.png) 30 30, auto;
   }
 
   .btn-sound img{
@@ -348,14 +348,6 @@ export default {
     top: -5px;
     left: 0px;
     height: 11px;
-  }
-
-  .down-progress-bar{
-    position: absolute;
-    bottom: 0px;
-    height: 4px;
-    width: 0%;
-    background: #9D9D9D;
   }
 
   .emergence-num-welcome{

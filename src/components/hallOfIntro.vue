@@ -2,7 +2,7 @@
   <div>
     <div class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
-      <video id="video" class="hidden-video" muted>
+      <video id="video" class="display-none" muted>
         <source id="video-source" src="/static/video/hoolofintro.mp4" type="video/mp4">
       </video>
       <!-- <audio id="audio">
@@ -23,33 +23,18 @@
           <span>Ꙁ Ѧ C Т Ã Ꞗ K Ꙙ</span>
         </div>
       </div>
-      <div class="help-message" v-bind:class="{ 'help-message-active': help_message.visible }">
-        <span>{{help_message.text}}</span>
-      </div>
       <div class="rooms">
         <div>
-          <router-link to='/hallofIntro' class="num-room">I</router-link>
-            <div class="title-room">
-              <span>Ꙁ Ѧ C Т Ã Ꞗ K Ꙙ</span>
-            </div>
+          <router-link to='/hallofIntro' class="num-room num-room-active emergence-num-room-active">I</router-link>
         </div>
         <div>
-          <router-link to='/hallofLetter' class="num-room emergence-num-room-active">II</router-link>
-          <div class="title-room">
-            <span>Б Ӯ ₭ Ḇ И Ꙡ Ѧ</span>
-          </div>
+          <router-link to='/hallofLetter' class="num-room">II</router-link>
         </div>
         <div>
           <router-link to='/hallofText' class="num-room">III</router-link>
-          <div class="title-room">
-            <span>Π Θ Λ Ú Ỵ C T Ᾱ ß</span>
-          </div>
         </div>
         <div>
           <router-link to='#' class="num-room">IV</router-link>
-          <div class="title-room">
-            <span>K O Ħ Ꙡ Ꝋ β Ǩ Ѧ</span>
-          </div>
         </div>
       </div>
       <div class="btn-sound" id="btn-sound">
@@ -145,7 +130,12 @@ export default {
         } else {
           document.getElementById('down-shadow').style.boxShadow = "0px -10px 100px 50px #090707";
         }
-      });
+        if (self.help_message.visible){
+            document.getElementById('app').style.cursor = "url(/static/img/cursor/next.png) 30 30, auto";
+          } else {
+            document.getElementById('app').style.cursor = "url(/static/img/cursor/default.png) 30 30, auto";
+          }
+        });
 
       document.addEventListener('mousedown', (e)=>{
         if (self.help_message.visible){
@@ -253,15 +243,12 @@ export default {
 <style scoped>
   .wrapper{
     position: absolute;
+    overflow: hidden;
     top: 0px;
     right: 0px;
     height: 100%;
     width: 100%;
     background-color: black;
-  }
-
-  .hidden-video{
-    display: none;
   }
 
   .canvas-video{
@@ -291,8 +278,8 @@ export default {
   }
 
   .title-welcome{
-    margin-top: 65px;
-    font-size: 45px;
+    margin-top: 60px;
+    font-size: 25px;
     color: #ffffff;
     opacity: 0;
   }
@@ -308,71 +295,41 @@ export default {
   }
 
   .current-room-title{
-    padding: 50px;
+    padding: 0px;
     opacity: 0;
-  }
-
-  .help-message{
-    transition-timing-function: ease;
-    transition-duration: 0.3s;
-    font-size: 14px;
-    padding: 15px 0px 45px;
-    color: #aaa;
-    opacity: 0;
-    user-select: none;
-  }
-
-  .help-message-active{
-    animation-name: help-message-flashing;
-    animation-duration: 4s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;    
   }
 
   .current-room-title span{
-    font-size: 22px;
-    padding: 50px;
+    font-size: 20px;
     color: #e1e1e1;
     text-shadow: 0px 0px 27px #000;
     user-select: none;
   }
 
+  .rooms{
+    padding-top: 25px;
+  }
+
+  .rooms a{
+    color: #9D9D9D;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: url(/static/img/cursor/pointer.png) 30 30, auto;
+    user-select: none;
+  }
+  
   .rooms>div{
     position: relative;
     display: inline-block;
     padding: 0px 45px;
   }
 
-  .rooms a, .rooms span{
-    color: #9D9D9D;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  a.num-room:hover + .title-room{
-    opacity: 1;
-  }
-
   .rooms .num-room{
     padding: 10px;
   }
 
-  .rooms .title-room{
-    position: absolute;
-    bottom: 35px;
-    left: 0px;
-    width: 120px;
-    transition-duration: 1s;
-    transition-timing-function: ease;
-    text-align: center;
-    opacity: 0;
-  }
-  
-  .down-shadow{
+ .down-shadow{
     position: absolute;
     bottom: 0px;
     transition-timing-function: ease;
@@ -389,7 +346,7 @@ export default {
     bottom: 40px;
     width: 28px;
     height: 5px;
-    cursor: pointer;
+    cursor: url(/static/img/cursor/pointer.png) 30 30, auto;
   }
 
   .btn-sound img{
@@ -405,16 +362,8 @@ export default {
     height: 11px;
   }
 
-  .down-progress-bar{
-    position: absolute;
-    bottom: 0px;
-    height: 4px;
-    width: 0%;
-    background: #9D9D9D;
-  }
-
   .emergence-num-welcome{
-    animation-name: emergence-num-welcome;
+    animation-name: emergence-opacity-essence;
     animation-duration: 4s;
     animation-delay: .1s;
     animation-timing-function: ease;
@@ -422,14 +371,14 @@ export default {
   }
 
   .hidden-num-welcome{
-    animation-name: hidden-num-welcome;
+    animation-name: hidden-opacity-essence;
     animation-duration: 1.5s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
   }
 
   .emergence-title-welcome{
-    animation-name: emergence-title-welcome;
+    animation-name: emergence-opacity-essence;
     animation-duration: 7s;
     animation-delay: .5s;
     animation-timing-function: ease;
@@ -445,22 +394,15 @@ export default {
   }
 
   .hidden-current-room-title{
-    animation-name: hidden-current-room-title;
+    animation-name: hidden-opacity-essence;
     animation-duration: 1.0s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;  
   }
   
   .hidden-title-welcome{
-    animation-name: hidden-title-welcome;
+    animation-name: hidden-opacity-essence;
     animation-duration: 3s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-  }
-
-  .emergence-down-shadow{
-    animation-name: emergence-down-shadow;
-    animation-duration: 2s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
   }
@@ -472,31 +414,11 @@ export default {
     animation-fill-mode: forwards;
   }
 
-  @keyframes emergence-num-welcome{
-    from{
-      opacity: 0;
-    }
-    to{
-      opacity: 1;
-    }
-  }
-
-  @keyframes hidden-num-welcome{
-    from{
-      opacity: 1;
-    }
-    to{
-      opacity: 0;
-    }
-  }
-
-  @keyframes emergence-title-welcome {
-    from{
-      opacity: 0;
-    }
-    to{
-      opacity: 1;
-    }   
+  .emergence-down-shadow{
+    animation-name: emergence-opacity-essence;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
   }
 
   @keyframes emergence-current-room-title {
@@ -509,56 +431,17 @@ export default {
       padding: 0px;
     }   
   }
-
-  @keyframes hidden-current-room-title {
-    from{
-      opacity: 1;
-    }
-    to{
-      opacity: 0;
-    }
-  }
-
-  @keyframes hidden-title-welcome {
-    from{
-      opacity: 1;
-    }
-    to{
-      opacity: 0;
-    }
-  }
-
-  @keyframes emergence-down-shadow {
-    from{
-      opacity: 0;
-    }
-    to{
-      opacity: 1;
-    }
-  }
-
+  
   @keyframes emergence-num-room-active {
     from{
       color: #9D9D9D;
+      font-size: 13px;
     }
     to{
-      color: #FFF;
+      color: #CCC;
+      font-size: 15px;
       text-shadow: 0px 0px;
     }
   }
 
-  @keyframes help-message-flashing {
-    0%{
-      opacity: .4;
-      color: #9D9D9D;
-    }
-    50%{
-      opacity: 1;
-      color: #fff;
-    }
-    100%{
-      opacity: .4;
-      color: #9D9D9D;     
-    }
-  }
 </style>

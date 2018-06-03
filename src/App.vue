@@ -11,24 +11,47 @@ export default {
 </script>
 
 <style>
-body{
-  padding: 0px;
-  margin: 0px;
-}
+  @font-face {
+    font-family: Romulc;
+    src: url(assets/fonts/Romulc.otf);
 
-#app {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  width: auto;
-  min-width:  100%;
-  min-height: 100%;
-  background-color: #1B1D1F;
-}
+  }
 
-@font-face {
-  font-family: Romulc;
-  src: url(assets/fonts/Romulc.otf);
+  body{
+    padding: 0px;
+    margin: 0px;
+  }
 
-}
+  #app {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: auto;
+    min-width:  100%;
+    min-height: 100%;
+    background-color: #1B1D1F;
+    cursor: url(/static/img/cursor/default.png) 30 30, auto;
+  }
+
+  .display-none{
+    display: none;
+  }
+
+  @keyframes emergence-opacity-essence{
+    from{
+      opacity: 0;
+    }
+    to{
+      opacity: 1;
+    }
+  }
+
+  @keyframes hidden-opacity-essence{
+    from{
+      opacity: 1;
+    }
+    to{
+      opacity: 0;
+    }
+  }
 </style>
