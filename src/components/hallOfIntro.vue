@@ -140,19 +140,14 @@ export default {
             self.stage++;
             if (self.stage<=self.videos.length - 1){
               self.video.currentTime = self.videos[self.stage].start;
-              // self.audio.currentTime = self.audios[self.stage].time_from;
-
-              // if (self.stage==self.videos.length - 1){
-              //   setTimeout(()=>{
-              //     self.smoothDecreaseVolume();
-              //   }, 3000);
-              // }
+              // self.audio.currentTime = self.audios[self.stage].start;
+            
+            //   if (self.stage==self.videos.length - 1){
+            //     setTimeout(()=>{
+            //       self.smoothDecreaseVolume();
+            //     }, 3000);
+            //   }
             } 
-            // else {
-            //   document.getElementById('current-room-title').className = "hidden-current-room-title current-room-title";
-            //   self.video.pause();
-            //   self.audio.pause();
-            // }
           }
         }
       });
@@ -240,11 +235,11 @@ export default {
 <style scoped>
   .wrapper{
     position: absolute;
-    overflow: hidden;
     top: 0px;
     right: 0px;
     height: 100%;
     width: 100%;
+    overflow: hidden;
     background-color: black;
   }
 
@@ -474,7 +469,6 @@ export default {
   @keyframes emergence-mouse-click {
     from{
       margin-bottom: 15px;
-      opacity: 0px;
     }
     to{
       margin-bottom: 20px;
@@ -485,7 +479,6 @@ export default {
   @keyframes hidden-mouse-click {
     from{
       margin-bottom: 20px;
-      opacity: 1;
     }
     to{
       margin-bottom: 15px;
