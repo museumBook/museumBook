@@ -13,14 +13,15 @@
           <span>I</span>
         </div>
         <div id="title-welcome" class="title-welcome emergence-title-welcome">
-          <span>Ꙁ Ѧ C Т Ã Ꞗ K Ꙙ</span>
+          <img src='/static/img/roomLabels/intro.png'>
         </div>
       </div>
     </div>
     <div class="down-rooms">
       <div class="current-room">
+        <img class="mouse-click" v-bind:class="[help_message.click ? 'mouse-click-active': 'mouse-click-disactive' ]" src="/static/img/cursor/clickMouse.png">
         <div id="current-room-title" class="current-room-title">
-          <span>Ꙁ Ѧ C Т Ã Ꞗ K Ꙙ</span>
+          <img src='/static/img/roomLabels/intro.png'>
         </div>
       </div>
       <div class="rooms">
@@ -57,8 +58,7 @@ export default {
       video_source:{},
       audio_source:{},
       help_message:{
-        visible: false,
-        text:'click on the mouse to continue'
+        click: false
       },
       stage:0,
       playing: true,
@@ -130,33 +130,30 @@ export default {
         } else {
           document.getElementById('down-shadow').style.boxShadow = "0px -10px 100px 50px #090707";
         }
-        if (self.help_message.visible){
-            document.getElementById('app').style.cursor = "url(/static/img/cursor/next.png) 30 30, auto";
-          } else {
-            document.getElementById('app').style.cursor = "url(/static/img/cursor/default.png) 30 30, auto";
-          }
-        });
+      });
 
       document.addEventListener('mousedown', (e)=>{
-        if (self.help_message.visible){
-          if (!self.playing) self.video.play();
-          self.help_message.visible = false;
-          self.stage++;
-          if (self.stage<=self.videos.length - 1){
-            self.video.currentTime = self.videos[self.stage].start;
-            // self.audio.currentTime = self.audios[self.stage].time_from;
+        if (self.help_message.click){
+          if (e.button == 0){
+            if (!self.playing) self.video.play();
+            self.help_message.click = false;
+            self.stage++;
+            if (self.stage<=self.videos.length - 1){
+              self.video.currentTime = self.videos[self.stage].start;
+              // self.audio.currentTime = self.audios[self.stage].time_from;
 
-            // if (self.stage==self.videos.length - 1){
-            //   setTimeout(()=>{
-            //     self.smoothDecreaseVolume();
-            //   }, 3000);
+              // if (self.stage==self.videos.length - 1){
+              //   setTimeout(()=>{
+              //     self.smoothDecreaseVolume();
+              //   }, 3000);
+              // }
+            } 
+            // else {
+            //   document.getElementById('current-room-title').className = "hidden-current-room-title current-room-title";
+            //   self.video.pause();
+            //   self.audio.pause();
             // }
-          } 
-          // else {
-          //   document.getElementById('current-room-title').className = "hidden-current-room-title current-room-title";
-          //   self.video.pause();
-          //   self.audio.pause();
-          // }
+          }
         }
       });
 
@@ -164,7 +161,7 @@ export default {
         if (e.target.currentTime >= self.videos[self.stage].end){
           if (self.videos[self.stage].onEnd == 'loop'){
             e.target.currentTime = self.videos[self.stage].start;
-            self.help_message.visible = true;
+            self.help_message.click = true;
           } else
           if (self.videos[self.stage].onEnd == 'next'){
             self.stage++;
@@ -178,11 +175,11 @@ export default {
         }
         if (self.videos[self.stage].rewind_from){
             if (e.target.currentTime>=self.videos[self.stage].rewind_from){
-              self.help_message.visible = true;
+              self.help_message.click = true;
             }
         }
         if (self.videos[self.stage].onEnd == 'loop'){
-          self.help_message.visible = true;
+          self.help_message.click = true;
         }
       }, false);
 
@@ -284,6 +281,11 @@ export default {
     opacity: 0;
   }
 
+  .title-welcome>img{
+    width: 200px;
+    height: 30px;
+  }
+
   .down-rooms{
     position: absolute;
     bottom: 0px;
@@ -299,11 +301,16 @@ export default {
     opacity: 0;
   }
 
-  .current-room-title span{
-    font-size: 20px;
-    color: #e1e1e1;
-    text-shadow: 0px 0px 27px #000;
+  .mouse-click{
+    margin-bottom: 20px;
+    height: 20px;
+    opacity: 0;
     user-select: none;
+  }
+
+  .current-room-title img{
+    width: 150px;
+    height: 23px;
   }
 
   .rooms{
@@ -311,12 +318,18 @@ export default {
   }
 
   .rooms a{
+    transition: .3s;
     color: #9D9D9D;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
-    cursor: url(/static/img/cursor/pointer.png) 30 30, auto;
+    cursor: pointer;
     user-select: none;
+  }
+
+  .rooms a:hover{
+    font-size: 17px;
+    color: #CCC;
   }
   
   .rooms>div{
@@ -346,7 +359,7 @@ export default {
     bottom: 40px;
     width: 28px;
     height: 5px;
-    cursor: url(/static/img/cursor/pointer.png) 30 30, auto;
+    cursor: pointer;
   }
 
   .btn-sound img{
@@ -407,6 +420,20 @@ export default {
     animation-fill-mode: forwards;
   }
 
+  .mouse-click-active{
+    animation-name: emergence-mouse-click;
+    animation-duration: .5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+  }
+
+  .mouse-click-disactive{
+    animation-name: hidden-mouse-click;
+    animation-duration: .2s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+  }
+
   .emergence-num-room-active{
     animation-name: emergence-num-room-active;
     animation-duration: 4s;
@@ -439,9 +466,30 @@ export default {
     }
     to{
       color: #CCC;
-      font-size: 15px;
+      font-size: 17px;
       text-shadow: 0px 0px;
     }
   }
 
+  @keyframes emergence-mouse-click {
+    from{
+      margin-bottom: 15px;
+      opacity: 0px;
+    }
+    to{
+      margin-bottom: 20px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes hidden-mouse-click {
+    from{
+      margin-bottom: 20px;
+      opacity: 1;
+    }
+    to{
+      margin-bottom: 15px;
+      opacity: 0;
+    }
+  }
 </style>

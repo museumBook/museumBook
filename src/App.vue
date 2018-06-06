@@ -30,7 +30,7 @@ export default {
     min-width:  100%;
     min-height: 100%;
     background-color: #1B1D1F;
-    cursor: url(/static/img/cursor/default.png) 30 30, auto;
+    cursor: url(/static/img/cursor/default1.png) 30 30, auto;
   }
 
   .display-none{
