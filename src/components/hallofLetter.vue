@@ -3,7 +3,7 @@
     <div class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
       <video id="video" class="display-none" muted>
-        <source id="video-source" src="/static/video/hallofletter.mp4" type="video/mp4">
+        <source id="video-source" src="/static/video/hallOfLetter.mp4" type="video/mp4">
       </video>
       <!-- <audio id="audio">
         <source id="audio-source" src="/static/audio/hallOfText.mp3" type="audio/mp3">
@@ -35,7 +35,7 @@
           <router-link to='/hallofText' class="num-room">III</router-link>
         </div>
         <div>
-          <router-link to='#' class="num-room">IV</router-link>
+          <router-link to='/hallOfEnd' class="num-room">IV</router-link>
         </div>
       </div>
       <div class="btn-sound" id="btn-sound">
@@ -72,6 +72,26 @@ export default {
           start: 37,
           end: 40,
           onEnd: "loop"
+        },
+        {
+          start: 40,
+          end: 44,
+          onEnd: "loop"
+        },
+        {
+          start: 44,
+          end: 48,
+          onEnd: "loop"
+        },
+        {
+          start: 48,
+          end: 53,
+          onEnd: "loop"
+        },
+        {
+          start: 53,
+          end: 63,
+          onEnd: "loop"
         }
       ],
       audios: []
@@ -97,7 +117,6 @@ export default {
       self.video.play();
       // self.audio.play();
       // self.audio.volume = 0;
-      // self.smoothIncreaseVolume();
 
       setTimeout(() => {
         document.getElementById("num-welcome").className =
@@ -125,7 +144,7 @@ export default {
 
       document.addEventListener("mousedown", e => {
         if (e.button == 0) {
-          self.stage = 1;
+          self.stage = Math.floor(Math.random() * (6 - 1)) + 1;
           self.video.currentTime = self.videos[self.stage].start;
           document.addEventListener("mouseup", e => {
             self.stage = 0;
@@ -155,7 +174,7 @@ export default {
       self.video.addEventListener(
         "play",
         function() {
-          var $this = this; //cache
+          var $this = this;
           self.canvas.width = document.documentElement.clientWidth;
           self.canvas.height = document.documentElement.clientHeight;
           (function loop() {
@@ -167,7 +186,7 @@ export default {
                 document.documentElement.clientWidth,
                 document.documentElement.clientHeight
               );
-              setTimeout(loop, 1000 / 30); // drawing at 30fps
+              setTimeout(loop, 1000 / 30);
             }
           })();
         },
@@ -182,26 +201,6 @@ export default {
       } else {
         this.audio.volume = 1;
         document.getElementById("btn-sound").style.overflow = "inherit";
-      }
-    },
-
-    smoothIncreaseVolume: function() {
-      const self = this;
-      if (self.audio.volume < 1) {
-        self.audio.volume += 0.01;
-        setTimeout(() => {
-          self.smoothIncreaseVolume();
-        }, 40);
-      }
-    },
-
-    smoothDecreaseVolume: function() {
-      const self = this;
-      if (self.audio.volume > 0.05) {
-        self.audio.volume -= 0.05;
-        setTimeout(() => {
-          self.smoothDecreaseVolume();
-        }, 80);
       }
     }
   }

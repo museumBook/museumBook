@@ -3,7 +3,7 @@
     <div class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
       <video id="video" class="display-none" muted>
-        <source id="video-source" src="/static/video/hooloftext.mp4" type="video/mp4">
+        <source id="video-source" src="/static/video/hallOfText.mp4" type="video/mp4">
       </video>
       <audio id="audio">
         <source id="audio-source" src="/static/audio/hallOfText.mp3" type="audio/mp3">
@@ -35,7 +35,7 @@
           <router-link to='/hallofText' class="num-room num-room-active emergence-num-room-active">III</router-link>
         </div>
         <div>
-          <router-link to='#' class="num-room">IV</router-link>
+          <router-link to='/hallOfEnd' class="num-room">IV</router-link>
         </div>
       </div>
       <div class="btn-sound" id="btn-sound">
@@ -85,33 +85,18 @@ export default {
         {
           start: 52,
           end: 60,
-          onEnd: "next"
+          onEnd: "nextRoom"
         }
       ],
       audios: [
         {
           start: 0,
-          end: 9,
-          onEnd: "next"
-        },
-        {
-          start: 9,
-          end: 16,
+          end: 138,
           onEnd: "loop"
         },
         {
-          start: 16,
-          end: 2,
-          onEnd: "next"
-        },
-        {
-          start: 22,
-          end: 28,
-          onEnd: "loop"
-        },
-        {
-          start: 22,
-          end: 29,
+          start: 139,
+          end: 312,
           onEnd: "loop"
         }
       ]
@@ -171,7 +156,12 @@ export default {
             self.stage++;
             if (self.stage <= self.videos.length - 1) {
               self.video.currentTime = self.videos[self.stage].start;
-              self.audio.currentTime = self.audios[self.stage].start;
+
+              if (self.stage == 2) {
+                setTimeout(() => {
+                  self.audio.currentTime = self.audios[1].start;
+                }, 1500);
+              }
 
               if (self.stage == self.videos.length - 1) {
                 setTimeout(() => {
@@ -196,29 +186,13 @@ export default {
               document.getElementById("current-room-title").className =
                 "hidden-current-room-title current-room-title";
               setTimeout(() => {
-                self.$router.push("hallOfLetter");
+                self.$router.push("hallOfEnding");
               }, 2000);
             }
           }
-          // if (self.videos[self.stage].rewind_from){
-          //     if (e.target.currentTime>=self.videos[self.stage].rewind_from){
-          //       self.help_message.click = true;
-          //     }
-          // }
+
           if (self.videos[self.stage].onEnd == "loop") {
             self.help_message.click = true;
-          }
-        },
-        false
-      );
-
-      self.audio.addEventListener(
-        "timeupdate",
-        function(e) {
-          if (e.target.currentTime >= self.audios[self.stage].end) {
-            if (self.audios[self.stage].onEnd == "loop") {
-              e.target.currentTime = self.audios[self.stage].start;
-            }
           }
         },
         false
@@ -227,7 +201,7 @@ export default {
       self.video.addEventListener(
         "play",
         function() {
-          var $this = this; //cache
+          var $this = this;
           self.canvas.width = document.documentElement.clientWidth;
           self.canvas.height = document.documentElement.clientHeight;
           (function loop() {
@@ -239,7 +213,7 @@ export default {
                 document.documentElement.clientWidth,
                 document.documentElement.clientHeight
               );
-              setTimeout(loop, 1000 / 30); // drawing at 30fps
+              setTimeout(loop, 1000 / 30);
             }
           })();
         },
@@ -248,7 +222,7 @@ export default {
     },
 
     toggleVolume: function() {
-      if (this.audio.volume == 1) {
+      if (this.audio.volume == 0) {
         this.audio.volume = 0;
         document.getElementById("btn-sound").style.overflow = "hidden";
       } else {
