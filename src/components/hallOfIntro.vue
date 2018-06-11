@@ -55,8 +55,6 @@ export default {
       audio: {},
       canvas: {},
       ctx: {},
-      video_source: {},
-      audio_source: {},
       help_message: {
         click: false
       },
@@ -98,9 +96,7 @@ export default {
   mounted: function() {
     const self = this;
     this.video = document.getElementById("video");
-    this.video_source = document.getElementById("video-source");
     // this.audio = document.getElementById('audio');
-    // this.audio_source = document.getElementById('audio-source');
     this.canvas = document.getElementById("canvas-video");
     this.ctx = this.canvas.getContext("2d");
     setTimeout(() => {
@@ -113,8 +109,6 @@ export default {
       const self = this;
       self.video.play();
       // self.audio.play();
-      // self.audio.volume = 0;
-      // self.smoothIncreaseVolume();
 
       setTimeout(() => {
         document.getElementById("num-welcome").className =
@@ -149,12 +143,6 @@ export default {
             if (self.stage <= self.videos.length - 1) {
               self.video.currentTime = self.videos[self.stage].start;
               // self.audio.currentTime = self.audios[self.stage].start;
-
-              //   if (self.stage==self.videos.length - 1){
-              //     setTimeout(()=>{
-              //       self.smoothDecreaseVolume();
-              //     }, 3000);
-              //   }
             }
           }
         }
@@ -200,7 +188,7 @@ export default {
       self.video.addEventListener(
         "play",
         function() {
-          var $this = this; //cache
+          var $this = this;
           self.canvas.width = document.documentElement.clientWidth;
           self.canvas.height = document.documentElement.clientHeight;
           (function loop() {
@@ -212,7 +200,7 @@ export default {
                 document.documentElement.clientWidth,
                 document.documentElement.clientHeight
               );
-              setTimeout(loop, 1000 / 30); // drawing at 30fps
+              setTimeout(loop, 1000 / 30);
             }
           })();
         },
@@ -228,26 +216,6 @@ export default {
         this.audio.volume = 1;
         document.getElementById("btn-sound").style.overflow = "inherit";
       }
-    },
-
-    smoothIncreaseVolume: function() {
-      const self = this;
-      if (self.audio.volume < 1) {
-        self.audio.volume += 0.01;
-        setTimeout(() => {
-          self.smoothIncreaseVolume();
-        }, 40);
-      }
-    },
-
-    smoothDecreaseVolume: function() {
-      const self = this;
-      if (self.audio.volume > 0.05) {
-        self.audio.volume -= 0.05;
-        setTimeout(() => {
-          self.smoothDecreaseVolume();
-        }, 80);
-      }
     }
   }
 };
@@ -262,6 +230,7 @@ export default {
   width: 100%;
   overflow: hidden;
   background-color: black;
+  cursor: url(/static/img/cursor/default1.png) 30 30, auto;
 }
 
 .canvas-video {

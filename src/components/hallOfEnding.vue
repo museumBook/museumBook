@@ -55,8 +55,6 @@ export default {
       audio: {},
       canvas: {},
       ctx: {},
-      video_source: {},
-      audio_source: {},
       help_message: {
         click: false
       },
@@ -81,9 +79,7 @@ export default {
   mounted: function() {
     const self = this;
     this.video = document.getElementById("video");
-    this.video_source = document.getElementById("video-source");
     this.audio = document.getElementById("audio");
-    this.audio_source = document.getElementById("audio-source");
     this.canvas = document.getElementById("canvas-video");
     this.ctx = this.canvas.getContext("2d");
     setTimeout(() => {
@@ -182,6 +178,7 @@ export default {
   width: 100%;
   overflow: hidden;
   background-color: black;
+  cursor: url(/static/img/cursor/default1.png) 30 30, auto;
 }
 
 .canvas-video {
