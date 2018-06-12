@@ -101,7 +101,7 @@ export default {
 
     setTimeout(() => {
       this.init();
-    }, 14000);
+    }, 2000);
   },
 
   methods: {
@@ -115,7 +115,7 @@ export default {
       setTimeout(() => {
         document
           .getElementById("static-home")
-          .setAttribute("src", "/static/img/homePage/static-home.png");
+          .setAttribute("src", "/static/img/homePage/static-home.gif");
         document.getElementById("static-home").style.display = "block";
 
         setTimeout(() => {
@@ -155,7 +155,7 @@ export default {
               e.target.setAttribute("src", "/static/img/homePage/room2.png");
             });
         }, 1000);
-      }, 17500);
+      }, 15000);
     },
 
     resize: function() {
@@ -193,29 +193,34 @@ export default {
 
       document.getElementById("room1").style.height =
         max_height * 200 / 1080 + "px";
+      document.getElementById("room1").style.top =
+        max_height * 860 / 1080 + "px";
+      document.getElementById("room1").style.left =
+        max_width * 700 / 1920 + width_offset + "px";
       document.getElementById("room2").style.height =
         max_height * 200 / 1080 + "px";
-
-      document.getElementById("rooms").style.top =
+      document.getElementById("room2").style.top =
         max_height * 860 / 1080 + "px";
+      document.getElementById("room2").style.left =
+        max_width * 1000 / 1920 + width_offset + "px";
 
       document.getElementById("quote1").style.top =
-        max_height * 360 / 1080 + "px";
+        max_height * 320 / 1080 + "px";
       document.getElementById("quote1").style.left =
-        max_width * 100 / 1920 + width_offset + "px";
+        max_width * 200 / 1920 + width_offset + "px";
       document.getElementById("quote1").style.width =
-        max_width * 380 / 1920 + "px";
+        max_width * 320 / 1920 + "px";
       document.getElementById("quote1").style.fontSize =
-        max_width * 22 / 1920 + "px";
+        max_width * 21 / 1920 + "px";
 
       document.getElementById("quote2").style.top =
-        max_height * 570 / 1080 + "px";
+        max_height * 480 / 1080 + "px";
       document.getElementById("quote2").style.left =
-        max_width * 1470 / 1920 + width_offset + "px";
+        max_width * 1400 / 1920 + width_offset + "px";
       document.getElementById("quote2").style.width =
-        max_width * 445 / 1920 + "px";
+        max_width * 400 / 1920 + "px";
       document.getElementById("quote2").style.fontSize =
-        max_width * 22 / 1920 + "px";
+        max_width * 21 / 1920 + "px";
     }
   }
 };
@@ -248,14 +253,9 @@ export default {
   display: none;
 }
 
-.rooms {
+#room1,
+#room2 {
   position: absolute;
-  width: 100%;
-  text-align: center;
-}
-
-.rooms img {
-  margin: 0px 30px;
   cursor: pointer;
   opacity: 0;
 }
@@ -267,11 +267,12 @@ export default {
 }
 
 .quote-text {
-  color: #fff;
+  color: #ddd;
+  text-shadow: 1px 1px 5px #000;
 }
 
 .quote-author {
-  color: #fff;
+  color: #ddd;
   font-weight: bold;
 }
 
