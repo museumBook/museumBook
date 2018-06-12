@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
       <video id="video" class="display-none" muted>
         <source id="video-source" src="/static/video/hallOfIntro.mp4" type="video/mp4">
@@ -19,7 +19,6 @@
     </div>
     <div class="down-rooms">
       <div class="current-room">
-        <img class="mouse-click" v-bind:class="[help_message.click ? 'mouse-click-active': 'mouse-click-disactive' ]" src="/static/img/cursor/clickMouse.png">
         <div id="current-room-title" class="current-room-title">
           <img src='/static/img/roomLabels/intro.png'>
         </div>
@@ -35,7 +34,7 @@
           <router-link to='/hallofText' class="num-room">III</router-link>
         </div>
         <div>
-          <router-link to='/hallOfEnd' class="num-room">IV</router-link>
+          <router-link to='/hallOfEnding' class="num-room">IV</router-link>
         </div>
       </div>
       <div class="btn-sound" id="btn-sound">
@@ -55,11 +54,8 @@ export default {
       audio: {},
       canvas: {},
       ctx: {},
-      help_message: {
-        click: false
-      },
+      enableAction: false,
       stage: 0,
-      playing: true,
       videos: [
         {
           start: 0,
@@ -135,10 +131,11 @@ export default {
       });
 
       document.addEventListener("mousedown", e => {
-        if (self.help_message.click) {
+        if (self.enableAction) {
           if (e.button == 0) {
             if (!self.playing) self.video.play();
-            self.help_message.click = false;
+            self.enableAction = false;
+            document.getElementById('wrapper').style.cursor = 'default';
             self.stage++;
             if (self.stage <= self.videos.length - 1) {
               self.video.currentTime = self.videos[self.stage].start;
@@ -154,7 +151,8 @@ export default {
           if (e.target.currentTime >= self.videos[self.stage].end) {
             if (self.videos[self.stage].onEnd == "loop") {
               e.target.currentTime = self.videos[self.stage].start;
-              self.help_message.click = true;
+              self.enableAction = true;
+              document.getElementById('wrapper').style.cursor = 'pointer';
             } else if (self.videos[self.stage].onEnd == "next") {
               self.stage++;
             } else if (self.videos[self.stage].onEnd == "nextRoom") {
@@ -167,11 +165,13 @@ export default {
           }
           if (self.videos[self.stage].rewind_from) {
             if (e.target.currentTime >= self.videos[self.stage].rewind_from) {
-              self.help_message.click = true;
+              self.enableAction = true;
+              document.getElementById('wrapper').style.cursor = 'pointer';
             }
           }
           if (self.videos[self.stage].onEnd == "loop") {
-            self.help_message.click = true;
+            self.enableAction = true;
+            document.getElementById('wrapper').style.cursor = 'pointer';
           }
         },
         false
@@ -230,7 +230,6 @@ export default {
   width: 100%;
   overflow: hidden;
   background-color: black;
-  cursor: url(/static/img/cursor/default1.png) 30 30, auto;
 }
 
 .canvas-video {
@@ -284,13 +283,6 @@ export default {
 .current-room-title {
   padding: 0px;
   opacity: 0;
-}
-
-.mouse-click {
-  margin-bottom: 20px;
-  height: 20px;
-  opacity: 0;
-  user-select: none;
 }
 
 .current-room-title img {

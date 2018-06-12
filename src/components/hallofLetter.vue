@@ -19,7 +19,6 @@
     </div>
     <div class="down-rooms">
       <div class="current-room">
-        <img class="mouse-click" v-bind:class="[help_message.click ? 'mouse-click-active': 'mouse-click-disactive' ]" src="/static/img/cursor/clickMouse.png">
         <div id="current-room-title" class="current-room-title">
           <img src='/static/img/roomLabels/letter.png'>
         </div>
@@ -35,7 +34,7 @@
           <router-link to='/hallofText' class="num-room">III</router-link>
         </div>
         <div>
-          <router-link to='/hallOfEnd' class="num-room">IV</router-link>
+          <router-link to='/hallOfEnding' class="num-room">IV</router-link>
         </div>
       </div>
       <div class="btn-sound" id="btn-sound">
@@ -55,11 +54,7 @@ export default {
       audio: {},
       canvas: {},
       ctx: {},
-      help_message: {
-        click: false
-      },
       stage: 0,
-      playing: true,
       videos: [
         {
           start: 5,
@@ -97,7 +92,6 @@ export default {
   },
 
   mounted: function() {
-    const self = this;
     this.video = document.getElementById("video");
     // this.audio = document.getElementById('audio');
     this.canvas = document.getElementById("canvas-video");
@@ -115,26 +109,20 @@ export default {
       // self.audio.volume = 0;
 
       setTimeout(() => {
-        document.getElementById("num-welcome").className =
-          "num-welcome hidden-num-welcome";
-        document.getElementById("down-shadow").className =
-          "down-shadow emergence-down-shadow";
+        document.getElementById("num-welcome").className ="num-welcome hidden-num-welcome";
+        document.getElementById("down-shadow").className = "down-shadow emergence-down-shadow";
       }, 100);
 
       setTimeout(() => {
-        document.getElementById("title-welcome").className =
-          "title-welcome hidden-title-welcome";
-        document.getElementById("current-room-title").className =
-          "emergence-current-room-title current-room-title";
+        document.getElementById("title-welcome").className = "title-welcome hidden-title-welcome";
+        document.getElementById("current-room-title").className = "emergence-current-room-title current-room-title";
       }, 300);
 
       document.addEventListener("mousemove", e => {
         if (e.clientY > window.innerHeight * 0.75) {
-          document.getElementById("down-shadow").style.boxShadow =
-            "0px -10px 100px 80px #090707";
+          document.getElementById("down-shadow").style.boxShadow = "0px -10px 100px 80px #090707";
         } else {
-          document.getElementById("down-shadow").style.boxShadow =
-            "0px -10px 100px 50px #090707";
+          document.getElementById("down-shadow").style.boxShadow = "0px -10px 100px 50px #090707";
         }
       });
 
@@ -212,7 +200,7 @@ export default {
   width: 100%;
   overflow: hidden;
   background-color: black;
-  cursor: url(/static/img/cursor/default1.png) 30 30, auto;
+  cursor: pointer;
 }
 
 .canvas-video {
@@ -268,16 +256,10 @@ export default {
   opacity: 0;
 }
 
-.mouse-click {
-  margin-bottom: 20px;
-  height: 20px;
-  opacity: 0;
-  user-select: none;
-}
-
 .current-room-title img {
   width: 150px;
   height: 23px;
+  user-select: none;
 }
 
 .rooms {

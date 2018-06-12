@@ -19,7 +19,6 @@
     </div>
     <div class="down-rooms">
       <div class="current-room">
-        <img class="mouse-click" v-bind:class="[help_message.click ? 'mouse-click-active': 'mouse-click-disactive' ]" src="/static/img/cursor/clickMouse.png">
         <div id="current-room-title" class="current-room-title">
           <img src='/static/img/roomLabels/ending.png'>
         </div>
@@ -35,7 +34,7 @@
           <router-link to='/hallOfText' class="num-room">III</router-link>
         </div>
         <div>
-          <router-link to='/hallOfEnd' class="num-room num-room-active emergence-num-room-active">IV</router-link>
+          <router-link to='/hallOfEnding' class="num-room num-room-active emergence-num-room-active">IV</router-link>
         </div>
       </div>
       <div class="btn-sound" id="btn-sound">
@@ -55,9 +54,6 @@ export default {
       audio: {},
       canvas: {},
       ctx: {},
-      help_message: {
-        click: false
-      },
       stage: 0,
       videos: [
         {
@@ -178,7 +174,6 @@ export default {
   width: 100%;
   overflow: hidden;
   background-color: black;
-  cursor: url(/static/img/cursor/default1.png) 30 30, auto;
 }
 
 .canvas-video {
@@ -232,13 +227,6 @@ export default {
 .current-room-title {
   padding: 0px;
   opacity: 0;
-}
-
-.mouse-click {
-  margin-bottom: 20px;
-  height: 20px;
-  opacity: 0;
-  user-select: none;
 }
 
 .current-room-title img {

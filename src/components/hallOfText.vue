@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
       <video id="video" class="display-none" muted>
         <source id="video-source" src="/static/video/hallOfText.mp4" type="video/mp4">
@@ -19,7 +19,6 @@
     </div>
     <div class="down-rooms">
       <div class="current-room">
-        <img class="mouse-click" v-bind:class="[help_message.click ? 'mouse-click-active': 'mouse-click-disactive' ]" src="/static/img/cursor/clickMouse.png">
         <div id="current-room-title" class="current-room-title">
           <img src='/static/img/roomLabels/text.png'>
         </div>
@@ -35,7 +34,7 @@
           <router-link to='/hallofText' class="num-room num-room-active emergence-num-room-active">III</router-link>
         </div>
         <div>
-          <router-link to='/hallOfEnd' class="num-room">IV</router-link>
+          <router-link to='/hallOfEnding' class="num-room">IV</router-link>
         </div>
       </div>
       <div class="btn-sound" id="btn-sound">
@@ -55,9 +54,7 @@ export default {
       audio: {},
       canvas: {},
       ctx: {},
-      help_message: {
-        click: false
-      },
+      enableAction: false,
       stage: 0,
       videos: [
         {
@@ -102,7 +99,6 @@ export default {
   },
 
   mounted: function() {
-    const self = this;
     this.video = document.getElementById("video");
     this.audio = document.getElementById("audio");
     this.canvas = document.getElementById("canvas-video");
@@ -117,38 +113,31 @@ export default {
       const self = this;
       self.video.play();
       self.audio.play();
-      // self.audio.volume = 0;
-      // self.smoothIncreaseVolume();
 
       setTimeout(() => {
-        document.getElementById("num-welcome").className =
-          "num-welcome hidden-num-welcome";
-        document.getElementById("down-shadow").className =
-          "down-shadow emergence-down-shadow";
+        document.getElementById("num-welcome").className = "num-welcome hidden-num-welcome";
+        document.getElementById("down-shadow").className = "down-shadow emergence-down-shadow";
       }, 100);
 
       setTimeout(() => {
-        document.getElementById("title-welcome").className =
-          "title-welcome hidden-title-welcome";
-        document.getElementById("current-room-title").className =
-          "emergence-current-room-title current-room-title";
+        document.getElementById("title-welcome").className = "title-welcome hidden-title-welcome";
+        document.getElementById("current-room-title").className = "emergence-current-room-title current-room-title";
       }, 300);
 
       document.addEventListener("mousemove", e => {
         if (e.clientY > window.innerHeight * 0.75) {
-          document.getElementById("down-shadow").style.boxShadow =
-            "0px -10px 100px 80px #090707";
+          document.getElementById("down-shadow").style.boxShadow = "0px -10px 100px 80px #090707";
         } else {
-          document.getElementById("down-shadow").style.boxShadow =
-            "0px -10px 100px 50px #090707";
+          document.getElementById("down-shadow").style.boxShadow = "0px -10px 100px 50px #090707";
         }
       });
 
       document.addEventListener("mousedown", e => {
-        if (self.help_message.click) {
+        if (self.enableAction) {
           if (e.button == 0) {
             if (!self.playing) self.video.play();
-            self.help_message.click = false;
+            self.enableAction = false;
+            document.getElementById('wrapper').style.cursor = 'default';
             self.stage++;
             if (self.stage <= self.videos.length - 1) {
               self.video.currentTime = self.videos[self.stage].start;
@@ -158,12 +147,6 @@ export default {
                   self.audio.currentTime = self.audios[1].start;
                 }, 1500);
               }
-
-              // if (self.stage == self.videos.length - 1) {
-              //   setTimeout(() => {
-              //     self.smoothDecreaseVolume();
-              //   }, 3000);
-              // }
             }
           }
         }
@@ -175,12 +158,12 @@ export default {
           if (e.target.currentTime >= self.videos[self.stage].end) {
             if (self.videos[self.stage].onEnd == "loop") {
               e.target.currentTime = self.videos[self.stage].start;
-              self.help_message.click = true;
+              self.enableAction = true;
+              document.getElementById('wrapper').style.cursor = 'pointer';
             } else if (self.videos[self.stage].onEnd == "next") {
               self.stage++;
             } else if (self.videos[self.stage].onEnd == "nextRoom") {
-              document.getElementById("current-room-title").className =
-                "hidden-current-room-title current-room-title";
+              document.getElementById("current-room-title").className = "hidden-current-room-title current-room-title";
               setTimeout(() => {
                 self.$router.push("hallOfEnding");
               }, 2000);
@@ -188,7 +171,8 @@ export default {
           }
 
           if (self.videos[self.stage].onEnd == "loop") {
-            self.help_message.click = true;
+            self.enableAction = true;
+            document.getElementById('wrapper').style.cursor = 'pointer';
           }
         },
         false
@@ -226,26 +210,6 @@ export default {
         document.getElementById("btn-sound").style.overflow = "inherit";
       }
     }
-
-    // smoothIncreaseVolume: function() {
-    //   const self = this;
-    //   if (self.audio.volume < 0.99) {
-    //     self.audio.volume += 0.01;
-    //     setTimeout(() => {
-    //       self.smoothIncreaseVolume();
-    //     }, 40);
-    //   }
-    // },
-
-    // smoothDecreaseVolume: function() {
-    //   const self = this;
-    //   if (self.audio.volume > 0.05) {
-    //     self.audio.volume -= 0.05;
-    //     setTimeout(() => {
-    //       self.smoothDecreaseVolume();
-    //     }, 80);
-    //   }
-    // }
   }
 };
 </script>
@@ -259,7 +223,6 @@ export default {
   width: 100%;
   overflow: hidden;
   background-color: black;
-  cursor: url(/static/img/cursor/default1.png) 30 30, auto;
 }
 
 .canvas-video {
@@ -313,13 +276,6 @@ export default {
 .current-room-title {
   padding: 0px;
   opacity: 0;
-}
-
-.mouse-click {
-  margin-bottom: 20px;
-  height: 20px;
-  opacity: 0;
-  user-select: none;
 }
 
 .current-room-title img {
