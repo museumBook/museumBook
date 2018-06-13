@@ -11,11 +11,6 @@ export default {
 </script>
 
 <style>
-@font-face {
-  font-family: Romulc;
-  src: url(assets/fonts/Romulc.otf);
-}
-
 body {
   padding: 0px;
   margin: 0px;
@@ -51,5 +46,20 @@ body {
   to {
     opacity: 0;
   }
+}
+
+@font-face {
+  font-family: Romulc;
+  src: url(assets/fonts/Romulc.otf);
+}
+
+@font-face {
+  font-family: Quote;
+  src: url(assets/fonts/Quote.ttf);
+}
+
+@font-face {
+  font-family: authorQuote;
+  src: url(assets/fonts/authorQuote.ttf);
 }
 </style>

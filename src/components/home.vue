@@ -24,11 +24,14 @@
         <img id="room1" src="/static/img/homePage/room1.png">
         <img id="room2" src="/static/img/homePage/room2.png">
       </div>
+      <div class="grandmothers" id=grandmothers>
+        <img id="grandmothers-img" src='/static/img/homePage/grandmothers.gif'>
+      </div>
     </div>
     <video id="video" class="display-none" muted>
       <source id="video-source" src="/static/video/home.mp4" type="video/mp4">
     </video>
-    <audio id="audio">
+    <audio id="audio" loop>
       <source id="audio-source" src="/static/audio/home.mp3" type="audio/mp3">
     </audio>
   </div>
@@ -101,7 +104,7 @@ export default {
 
     setTimeout(() => {
       this.init();
-    }, 2000);
+    }, 3800);
   },
 
   methods: {
@@ -117,6 +120,15 @@ export default {
           .getElementById("static-home")
           .setAttribute("src", "/static/img/homePage/static-home.gif");
         document.getElementById("static-home").style.display = "block";
+
+        setInterval(() => {
+          document.getElementById("grandmothers-img").className =
+            "grandmothers-img emergence-grandmother";
+          setTimeout(() => {
+            document.getElementById("grandmothers-img").className =
+              "grandmothers-img hidden-grandmother";
+          }, 3800);
+        }, 19000);
 
         setTimeout(() => {
           document.getElementById("room1").className = "emergence-room";
@@ -221,6 +233,10 @@ export default {
         max_width * 400 / 1920 + "px";
       document.getElementById("quote2").style.fontSize =
         max_width * 21 / 1920 + "px";
+
+      document.getElementById("grandmothers").style.left = width_offset + "px";
+      document.getElementById("grandmothers-img").style.height =
+        max_height * 900 / 1080 + "px";
     }
   }
 };
@@ -257,6 +273,7 @@ export default {
 #room2 {
   position: absolute;
   cursor: pointer;
+  z-index: 100;
   opacity: 0;
 }
 
@@ -269,11 +286,26 @@ export default {
 .quote-text {
   color: #ddd;
   text-shadow: 1px 1px 5px #000;
+  font-family: Quote;
 }
 
 .quote-author {
   color: #ddd;
-  font-weight: bold;
+  font-family: authorQuote;
+}
+
+.grandmothers {
+  position: absolute;
+  max-width: 100%;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.grandmothers img {
+  height: 740px;
+  z-index: 0;
+  opacity: 0;
 }
 
 .emergence-load-home {
@@ -293,6 +325,20 @@ export default {
 .emergence-quote {
   animation-name: emergence-opacity-essence;
   animation-duration: 2s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+.emergence-grandmother {
+  animation-name: emergence-opacity-essence;
+  animation-direction: 0.3s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+.hidden-grandmother {
+  animation-name: hidden-opacity-essence;
+  animation-direction: 0.3s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
 }
