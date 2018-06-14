@@ -216,7 +216,7 @@ export default {
         this.max_width * 1000 / 1920 + this.width_offset + "px";
 
       document.getElementById("quote1").style.top =
-        this.max_height * 360 / 1080 + this.height_offset + "px";
+        this.max_height * 380 / 1080 + this.height_offset + "px";
       document.getElementById("quote1").style.left =
         this.max_width * 225 / 1920 + this.width_offset + "px";
       document.getElementById("quote1").style.width =
