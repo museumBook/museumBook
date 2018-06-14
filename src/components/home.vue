@@ -2,22 +2,24 @@
   <div>
     <div id="wrapper" class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
-      <img id="static-home" class="background-home">
-      <img id="load-home" class="background-home">
       <div id="quote1">
-        <p class="quote-text">
-          «Cотни четыре домов старинного села двумя ровными порядками сбегали с холма 
-          вдоль неоглядной Печоры к ручью, за которым белели маковки собора»
-        </p>
+        <pre class="quote-text">
+«Cотни четыре домов старинного села 
+двумя ровными порядками сбегали с холма 
+вдоль неоглядной Печоры к ручью, 
+за которым белели маковки собора»
+        </pre>
       </div>
       <div id="quote2">
-        <p class="quote-text">
-          «Печора, окаймленная синью бескрайнего леса, величественно катит свои воды к Ледовитому океану; 
-          торопливо сбегают с Тимана и припадают к мати-Печоре супротив Усть-Цильмы изумрудно 
-          чистые близнецы-сестрицы Пижма и Цильма»
-        </p>
+        <pre class="quote-text">
+«Печора, окаймленная синью бескрайнего леса, 
+величественно катит свои воды
+к Ледовитому океану; торопливо сбегают
+с Тимана и припадают к мати-Печоре
+супротив Усть-Цильмы изумрудно чистые
+близнецы-сестрицы Пижма и Цильма»</pre>
         <p class="quote-author">
-          Лев Смоленцев «Печорские дали»
+          - Лев Смоленцев «Печорские дали»
         </p>
       </div>
       <div class="rooms" id="rooms">
@@ -48,10 +50,20 @@ export default {
       ctx: {},
       width: 0,
       height: 0,
+      max_height: 0,
+      max_width: 0,
+      height_offset: 0,
+      width_offset: 0,
+      stage: 0,
       videos: [
         {
           start: 0,
-          end: 6,
+          end: 10,
+          onEnd: "next"
+        },
+        {
+          start: 10,
+          end: 15,
           onEnd: "loop"
         }
       ]
@@ -60,25 +72,35 @@ export default {
 
   mounted: function() {
     const self = this;
-    this.video = document.getElementById("video");
-    this.audio = document.getElementById("audio");
-    this.canvas = document.getElementById("canvas-video");
-    this.ctx = this.canvas.getContext("2d");
-    this.width = document.documentElement.clientWidth;
-    this.height = document.documentElement.clientHeight;
-    this.resize();
-    this.video.play();
-    this.audio.play();
+    self.video = document.getElementById("video");
+    self.audio = document.getElementById("audio");
+    self.canvas = document.getElementById("canvas-video");
+    self.ctx = self.canvas.getContext("2d");
+    self.width = window.innerWidth;
+    self.height = window.innerHeight;
+    self.stage = 1;
+    self.video.play();
+    self.audio.play();
+    self.resize();
 
     self.video.addEventListener(
       "play",
       function() {
         var $this = this;
-        self.canvas.width = self.width;
-        self.canvas.height = self.height;
+
         (function loop() {
           if (!$this.paused && !$this.ended) {
-            self.ctx.drawImage($this, 0, 0, self.width, self.height);
+            self.ctx.drawImage(
+              $this,
+              0,
+              50,
+              1280,
+              620,
+              self.width_offset,
+              self.height_offset,
+              self.max_width,
+              self.max_height
+            );
             setTimeout(loop, 1000 / 30);
           }
         })();
@@ -87,16 +109,21 @@ export default {
     );
 
     window.addEventListener("resize", function(event) {
-      self.width = document.documentElement.clientWidth;
-      self.height = document.documentElement.clientHeight;
+      self.width = window.innerWidth;
+      self.height = window.innerHeight;
       self.resize();
     });
 
     self.video.addEventListener(
       "timeupdate",
       function(e) {
-        if (e.target.currentTime >= self.videos[0].end) {
-          e.target.currentTime = self.videos[0].start;
+        if (e.target.currentTime >= self.videos[self.stage].end) {
+          if (self.videos[self.stage].onEnd == "next") {
+            self.stage++;
+            e.target.currentTime = self.videos[self.stage].start;
+          } else if (self.videos[self.stage].onEnd == "loop") {
+            e.target.currentTime = self.videos[self.stage].start;
+          }
         }
       },
       false
@@ -109,18 +136,7 @@ export default {
 
   methods: {
     init: function() {
-      document
-        .getElementById("load-home")
-        .setAttribute("src", "/static/img/homePage/load-home.gif");
-      document.getElementById("load-home").className =
-        "background-home load-home emergence-load-home";
-
       setTimeout(() => {
-        document
-          .getElementById("static-home")
-          .setAttribute("src", "/static/img/homePage/static-home.gif");
-        document.getElementById("static-home").style.display = "block";
-
         setInterval(() => {
           document.getElementById("grandmothers-img").className =
             "grandmothers-img emergence-grandmother";
@@ -135,7 +151,6 @@ export default {
           document.getElementById("room2").className = "emergence-room";
           document.getElementById("quote1").className = "emergence-quote";
           document.getElementById("quote2").className = "emergence-quote";
-          document.getElementById("load-home").style.display = "none";
 
           document
             .getElementById("room1")
@@ -167,76 +182,63 @@ export default {
               e.target.setAttribute("src", "/static/img/homePage/room2.png");
             });
         }, 1000);
-      }, 15000);
+      }, 9200);
     },
 
     resize: function() {
-      var max_height;
-      var max_width;
-      var height_offset = 0;
-      var width_offset = 0;
-
       this.canvas.width = this.width;
       this.canvas.height = this.height;
 
+      this.width_offset = 0;
+      this.height_offset = 0;
+
       if (this.width > 16 / 9 * this.height) {
-        max_height = this.height;
-        max_width = 16 / 9 * this.height;
-        width_offset = 9 / 16 * this.width - this.height;
+        this.max_height = this.height;
+        this.max_width = 16 / 9 * this.height;
+        this.width_offset = 9 / 16 * this.width - this.height;
       } else {
-        max_width = this.width;
-        max_height = 9 / 16 * this.width;
+        this.max_width = this.width;
+        this.max_height = 9 / 16 * this.width;
+        this.height_offset = (this.height - this.max_height) / 2;
       }
 
-      document.getElementById("load-home").style.height =
-        max_height * 960 / 1080 + "px";
-      document.getElementById("static-home").style.height =
-        max_height * 960 / 1080 + "px";
-
-      document.getElementById("load-home").style.width =
-        max_width * 1706 / 1920 + "px";
-      document.getElementById("static-home").style.width =
-        max_width * 1706 / 1920 + "px";
-
-      document.getElementById("load-home").style.left =
-        max_width * 107 / 1920 + width_offset + "px";
-      document.getElementById("static-home").style.left =
-        max_width * 107 / 1920 + width_offset + "px";
-
       document.getElementById("room1").style.height =
-        max_height * 200 / 1080 + "px";
+        this.max_height * 200 / 1080 + "px";
       document.getElementById("room1").style.top =
-        max_height * 860 / 1080 + "px";
+        this.max_height * 860 / 1080 + this.height_offset + "px";
       document.getElementById("room1").style.left =
-        max_width * 700 / 1920 + width_offset + "px";
+        this.max_width * 700 / 1920 + this.width_offset + "px";
       document.getElementById("room2").style.height =
-        max_height * 200 / 1080 + "px";
+        this.max_height * 200 / 1080 + "px";
       document.getElementById("room2").style.top =
-        max_height * 860 / 1080 + "px";
+        this.max_height * 860 / 1080 + this.height_offset + "px";
       document.getElementById("room2").style.left =
-        max_width * 1000 / 1920 + width_offset + "px";
+        this.max_width * 1000 / 1920 + this.width_offset + "px";
 
       document.getElementById("quote1").style.top =
-        max_height * 320 / 1080 + "px";
+        this.max_height * 360 / 1080 + this.height_offset + "px";
       document.getElementById("quote1").style.left =
-        max_width * 200 / 1920 + width_offset + "px";
+        this.max_width * 225 / 1920 + this.width_offset + "px";
       document.getElementById("quote1").style.width =
-        max_width * 320 / 1920 + "px";
+        this.max_width * 320 / 1920 + "px";
       document.getElementById("quote1").style.fontSize =
-        max_width * 21 / 1920 + "px";
+        this.max_width * 20 / 1920 + "px";
 
       document.getElementById("quote2").style.top =
-        max_height * 480 / 1080 + "px";
+        this.max_height * 550 / 1080 + this.height_offset + "px";
       document.getElementById("quote2").style.left =
-        max_width * 1400 / 1920 + width_offset + "px";
+        this.max_width * 1425 / 1920 + this.width_offset + "px";
       document.getElementById("quote2").style.width =
-        max_width * 400 / 1920 + "px";
+        this.max_width * 400 / 1920 + "px";
       document.getElementById("quote2").style.fontSize =
-        max_width * 21 / 1920 + "px";
+        this.max_width * 20 / 1920 + "px";
 
-      document.getElementById("grandmothers").style.left = width_offset + "px";
+      document.getElementById("grandmothers").style.bottom =
+        this.height_offset + "px";
+      document.getElementById("grandmothers").style.left =
+        this.width_offset + "px";
       document.getElementById("grandmothers-img").style.height =
-        max_height * 900 / 1080 + "px";
+        this.max_height * 900 / 1080 + "px";
     }
   }
 };
@@ -284,20 +286,22 @@ export default {
 }
 
 .quote-text {
-  color: #ddd;
+  color: #bbb;
+  margin: 0px;
   text-shadow: 1px 1px 5px #000;
-  font-family: Quote;
+  font-family: Pfagorasanspro-italic;
 }
 
 .quote-author {
-  color: #ddd;
-  font-family: authorQuote;
+  color: #ccc;
+  text-align: right;
+  margin: 10px;
+  font-family: Pfagorasanspro-bold;
 }
 
 .grandmothers {
   position: absolute;
   max-width: 100%;
-  top: 0px;
   left: 0px;
   overflow: hidden;
 }

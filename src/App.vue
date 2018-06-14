@@ -54,12 +54,12 @@ body {
 }
 
 @font-face {
-  font-family: Quote;
-  src: url(assets/fonts/Quote.ttf);
+  font-family: Pfagorasanspro-italic;
+  src: url(assets/fonts/Pfagorasanspro-italic.ttf);
 }
 
 @font-face {
-  font-family: authorQuote;
-  src: url(assets/fonts/authorQuote.ttf);
+  font-family: Pfagorasanspro-bold;
+  src: url(assets/fonts/Pfagorasanspro-bold.ttf);
 }
 </style>
