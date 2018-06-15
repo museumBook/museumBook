@@ -23,8 +23,8 @@
         </p>
       </div>
       <div class="rooms" id="rooms">
-        <img id="room1" src="/static/img/homePage/room1.png">
-        <img id="room2" src="/static/img/homePage/room2.png">
+        <img id="room1" src="/static/img/homePage/room1.gif">
+        <img id="room2" src="/static/img/homePage/room2.gif">
       </div>
       <div class="grandmothers" id=grandmothers>
         <img id="grandmothers-img" src='/static/img/homePage/grandmothers.gif'>
@@ -143,8 +143,8 @@ export default {
           setTimeout(() => {
             document.getElementById("grandmothers-img").className =
               "grandmothers-img hidden-grandmother";
-          }, 3800);
-        }, 19000);
+          }, 2200);
+        }, 6600);
 
         setTimeout(() => {
           document.getElementById("room1").className = "emergence-room";
@@ -157,14 +157,14 @@ export default {
             .addEventListener("mouseover", function(e) {
               e.target.setAttribute(
                 "src",
-                "/static/img/homePage/room1hover.png"
+                "/static/img/homePage/room1hover.gif"
               );
             });
 
           document
             .getElementById("room1")
             .addEventListener("mouseleave", function(e) {
-              e.target.setAttribute("src", "/static/img/homePage/room1.png");
+              e.target.setAttribute("src", "/static/img/homePage/room1.gif");
             });
 
           document
@@ -172,17 +172,17 @@ export default {
             .addEventListener("mouseover", function(e) {
               e.target.setAttribute(
                 "src",
-                "/static/img/homePage/room2hover.png"
+                "/static/img/homePage/room2hover.gif"
               );
             });
 
           document
             .getElementById("room2")
             .addEventListener("mouseleave", function(e) {
-              e.target.setAttribute("src", "/static/img/homePage/room2.png");
+              e.target.setAttribute("src", "/static/img/homePage/room2.gif");
             });
         }, 1000);
-      }, 9200);
+      }, 8800);
     },
 
     resize: function() {
@@ -297,6 +297,7 @@ export default {
   color: #ccc;
   text-align: right;
   margin: 10px;
+  font-size: 0.9em;
   font-family: Pfagorasanspro-bold;
 }
 
