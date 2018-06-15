@@ -192,13 +192,13 @@ export default {
       this.width_offset = 0;
       this.height_offset = 0;
 
-      if (this.width > 16 / 9 * this.height - 110) {
+      if (this.width >= 16 / 9 * this.height) {
         this.max_height = this.height;
         this.max_width = 16 / 9 * (this.height + 110);
         this.width_offset = 9 / 16 * this.width - (this.height + 110);
       } else {
         this.max_width = this.width;
-        this.max_height = 9 / 16 * this.width;
+        this.max_height = 9 / 16 * this.width - 110;
         this.height_offset = (this.height - this.max_height) / 2;
       }
 
@@ -247,6 +247,7 @@ export default {
 <style scoped>
 .wrapper {
   position: absolute;
+  overflow: hidden;
   width: 100%;
   height: 100%;
 }
