@@ -192,10 +192,10 @@ export default {
       this.width_offset = 0;
       this.height_offset = 0;
 
-      if (this.width > 16 / 9 * this.height) {
+      if (this.width > 16 / 9 * this.height - 110) {
         this.max_height = this.height;
-        this.max_width = 16 / 9 * this.height;
-        this.width_offset = 9 / 16 * this.width - this.height;
+        this.max_width = 16 / 9 * (this.height + 110);
+        this.width_offset = 9 / 16 * this.width - (this.height + 110);
       } else {
         this.max_width = this.width;
         this.max_height = 9 / 16 * this.width;
