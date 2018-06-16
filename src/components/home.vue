@@ -87,8 +87,9 @@ export default {
       "play",
       function() {
         var $this = this;
-
         (function loop() {
+          self.ctx.fillStyle = "#2D2C2D";
+          self.ctx.fillRect(0, 0, self.width, self.height);
           if (!$this.paused && !$this.ended) {
             self.ctx.drawImage(
               $this,
@@ -144,7 +145,7 @@ export default {
             document.getElementById("grandmothers-img").className =
               "grandmothers-img hidden-grandmother";
           }, 2200);
-        }, 6600);
+        }, 22000);
 
         setTimeout(() => {
           document.getElementById("room1").className = "emergence-room";
