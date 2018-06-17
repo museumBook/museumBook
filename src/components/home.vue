@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div id="wrapper" class="wrapper">
-      <canvas id="canvas-video" class="canvas-video"></canvas>
-      <div id="quote1">
+    <fullScreenMenu></fullScreenMenu>
+    <div id="home" class="home">
+      <canvas id="home-canvas_video" class="home-canvas_video"></canvas>
+      <div id="home-quote_1">
         <pre class="quote-text">
 «Cотни четыре домов старинного села 
 двумя ровными порядками сбегали с холма 
@@ -10,7 +11,7 @@
 за которым белели маковки собора»
         </pre>
       </div>
-      <div id="quote2">
+      <div id="home-quote_2">
         <pre class="quote-text">
 «Печора, окаймленная синью бескрайнего леса, 
 величественно катит свои воды
@@ -18,13 +19,13 @@
 с Тимана и припадают к мати-Печоре
 супротив Усть-Цильмы изумрудно чистые
 близнецы-сестрицы Пижма и Цильма»</pre>
-        <p class="quote-author">
+        <p class="home-quote_author">
           - Лев Смоленцев «Печорские дали»
         </p>
       </div>
-      <div class="rooms" id="rooms">
-        <img id="room1" src="/static/img/homePage/room1.gif">
-        <img id="room2" src="/static/img/homePage/room2.gif">
+      <div class="home-rooms">
+        <img id="home-room_1" src="/static/img/homePage/room1.gif">
+        <img id="home-room_2" src="/static/img/homePage/room2.gif">
       </div>
       <div class="grandmothers" id=grandmothers>
         <img id="grandmothers-img" src='/static/img/homePage/grandmothers.gif'>
@@ -40,8 +41,12 @@
 </template>
 
 <script>
+import fullScreenMenu from "@/components/fullScreenMenu";
 export default {
   name: "home",
+  components: {
+    fullScreenMenu
+  },
   data() {
     return {
       video: {},
@@ -74,7 +79,7 @@ export default {
     const self = this;
     self.video = document.getElementById("video");
     self.audio = document.getElementById("audio");
-    self.canvas = document.getElementById("canvas-video");
+    self.canvas = document.getElementById("home-canvas_video");
     self.ctx = self.canvas.getContext("2d");
     self.width = window.innerWidth;
     self.height = window.innerHeight;
@@ -148,13 +153,13 @@ export default {
         }, 22000);
 
         setTimeout(() => {
-          document.getElementById("room1").className = "emergence-room";
-          document.getElementById("room2").className = "emergence-room";
-          document.getElementById("quote1").className = "emergence-quote";
-          document.getElementById("quote2").className = "emergence-quote";
+          document.getElementById("home-room_1").className = "emergence-room";
+          document.getElementById("home-room_2").className = "emergence-room";
+          document.getElementById("home-quote_1").className = "emergence-quote";
+          document.getElementById("home-quote_2").className = "emergence-quote";
 
           document
-            .getElementById("room1")
+            .getElementById("home-room_1")
             .addEventListener("mouseover", function(e) {
               e.target.setAttribute(
                 "src",
@@ -163,13 +168,13 @@ export default {
             });
 
           document
-            .getElementById("room1")
+            .getElementById("home-room_1")
             .addEventListener("mouseleave", function(e) {
               e.target.setAttribute("src", "/static/img/homePage/room1.gif");
             });
 
           document
-            .getElementById("room2")
+            .getElementById("home-room_2")
             .addEventListener("mouseover", function(e) {
               e.target.setAttribute(
                 "src",
@@ -178,7 +183,7 @@ export default {
             });
 
           document
-            .getElementById("room2")
+            .getElementById("home-room_2")
             .addEventListener("mouseleave", function(e) {
               e.target.setAttribute("src", "/static/img/homePage/room2.gif");
             });
@@ -203,35 +208,35 @@ export default {
         this.height_offset = (this.height - this.max_height) / 2;
       }
 
-      document.getElementById("room1").style.height =
+      document.getElementById("home-room_1").style.height =
         this.max_height * 200 / 1080 + "px";
-      document.getElementById("room1").style.top =
+      document.getElementById("home-room_1").style.top =
         this.max_height * 860 / 1080 + this.height_offset + "px";
-      document.getElementById("room1").style.left =
+      document.getElementById("home-room_1").style.left =
         this.max_width * 700 / 1920 + this.width_offset + "px";
-      document.getElementById("room2").style.height =
+      document.getElementById("home-room_2").style.height =
         this.max_height * 200 / 1080 + "px";
-      document.getElementById("room2").style.top =
+      document.getElementById("home-room_2").style.top =
         this.max_height * 860 / 1080 + this.height_offset + "px";
-      document.getElementById("room2").style.left =
+      document.getElementById("home-room_2").style.left =
         this.max_width * 1000 / 1920 + this.width_offset + "px";
 
-      document.getElementById("quote1").style.top =
+      document.getElementById("home-quote_1").style.top =
         this.max_height * 380 / 1080 + this.height_offset + "px";
-      document.getElementById("quote1").style.left =
+      document.getElementById("home-quote_1").style.left =
         this.max_width * 225 / 1920 + this.width_offset + "px";
-      document.getElementById("quote1").style.width =
+      document.getElementById("home-quote_1").style.width =
         this.max_width * 320 / 1920 + "px";
-      document.getElementById("quote1").style.fontSize =
+      document.getElementById("home-quote_1").style.fontSize =
         this.max_width * 20 / 1920 + "px";
 
-      document.getElementById("quote2").style.top =
+      document.getElementById("home-quote_2").style.top =
         this.max_height * 550 / 1080 + this.height_offset + "px";
-      document.getElementById("quote2").style.left =
+      document.getElementById("home-quote_2").style.left =
         this.max_width * 1425 / 1920 + this.width_offset + "px";
-      document.getElementById("quote2").style.width =
+      document.getElementById("home-quote_2").style.width =
         this.max_width * 400 / 1920 + "px";
-      document.getElementById("quote2").style.fontSize =
+      document.getElementById("home-quote_2").style.fontSize =
         this.max_width * 20 / 1920 + "px";
 
       document.getElementById("grandmothers").style.bottom =
@@ -246,14 +251,14 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+.home {
   position: absolute;
   overflow: hidden;
   width: 100%;
   height: 100%;
 }
 
-.wrapper canvas {
+.home canvas {
   position: absolute;
 }
 
@@ -273,16 +278,16 @@ export default {
   display: none;
 }
 
-#room1,
-#room2 {
+#home-room_1,
+#home-room_2 {
   position: absolute;
   cursor: pointer;
   z-index: 100;
   opacity: 0;
 }
 
-#quote1,
-#quote2 {
+#home-quote_1,
+#home-quote_2 {
   position: absolute;
   opacity: 0;
 }
@@ -294,7 +299,7 @@ export default {
   font-family: Pfagorasanspro-italic;
 }
 
-.quote-author {
+.home-quote_author {
   color: #ccc;
   text-align: right;
   margin: 10px;
