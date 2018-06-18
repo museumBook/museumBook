@@ -3,6 +3,7 @@
     <div class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
       <video id="video" class="display-none" muted>
+      <!-- <video id="video" class="display-none" controls> -->
         <source id="video-source" src="/static/video/hallOfLetter.mp4" type="video/mp4">
       </video>
       <!-- <audio id="audio">
