@@ -1,7 +1,7 @@
 <template>
     <div id="full_screen_menu" class="full_screen_menu">
       <canvas id="full_screen_menu-canvas_video" class="canvas_video"></canvas>
-      <div class="full_screen_menu-grid">
+      <div v-bind:class="{'open': $store.state.visible_blackout, 'full_screen_menu-grid': true}">
           <div class="grid-item">
             <img v-on:click="ch_volume_of_music" src="/static/img/fullscreenMenu/equalizer.gif">
           </div>

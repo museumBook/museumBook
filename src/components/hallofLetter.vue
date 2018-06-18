@@ -110,20 +110,26 @@ export default {
       // self.audio.volume = 0;
 
       setTimeout(() => {
-        document.getElementById("num-welcome").className ="num-welcome hidden-num-welcome";
-        document.getElementById("down-shadow").className = "down-shadow emergence-down-shadow";
+        document.getElementById("num-welcome").className =
+          "num-welcome hidden-num-welcome";
+        document.getElementById("down-shadow").className =
+          "down-shadow emergence-down-shadow";
       }, 100);
 
       setTimeout(() => {
-        document.getElementById("title-welcome").className = "title-welcome hidden-title-welcome";
-        document.getElementById("current-room-title").className = "emergence-current-room-title current-room-title";
+        document.getElementById("title-welcome").className =
+          "title-welcome hidden-title-welcome";
+        document.getElementById("current-room-title").className =
+          "emergence-current-room-title current-room-title";
       }, 300);
 
       document.addEventListener("mousemove", e => {
         if (e.clientY > window.innerHeight * 0.75) {
-          document.getElementById("down-shadow").style.boxShadow = "0px -10px 100px 80px #090707";
+          document.getElementById("down-shadow").style.boxShadow =
+            "0px -10px 100px 80px #090707";
         } else {
-          document.getElementById("down-shadow").style.boxShadow = "0px -10px 100px 50px #090707";
+          document.getElementById("down-shadow").style.boxShadow =
+            "0px -10px 100px 50px #090707";
         }
       });
 
