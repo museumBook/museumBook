@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <div v-bind:class="{active: $store.state.visible_blackout, blackout: true}"></div>
+    <div v-if="$store.state.visible_blackout" class="blackout"></div>
   </div>
 </template>
 
@@ -40,11 +40,7 @@ body {
   height: 100%;
   transition: 0.5s;
   background: #000;
-  opacity: 0;
-}
-
-.blackout.active {
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 @keyframes emergence-opacity-essence {

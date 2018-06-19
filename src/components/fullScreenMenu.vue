@@ -1,5 +1,5 @@
 <template>
-    <div id="full_screen_menu" class="full_screen_menu">
+    <div id="full_screen_menu" v-bind:class="{'active': $store.state.visible_full_screen_menu, 'full_screen_menu': true}">
       <canvas id="full_screen_menu-canvas_video" class="canvas_video"></canvas>
       <div v-on:click="toggle_menu" class="toggle_menu">
         <span></span>
@@ -8,35 +8,37 @@
         <span></span>
       </div>
       <div v-bind:class="{'active': $store.state.visible_full_screen_menu, 'full_screen_menu-grid': true}">
-          <div class="grid-item">
+          <div class="grid_item">
             <img v-on:click="ch_volume_of_music" src="/static/img/fullscreenMenu/equalizer.gif">
           </div>
-          <div class="grid-item">
+          <div class="grid_item">
             <img class="logo" src="/static/img/fullscreenMenu/marfa_ust_cilma.png">
           </div>
-          <div class="grid-item">
+          <div class="grid_item">
             <img class="close" src="/static//icon/close.svg">
           </div>
-          <div class="grid-item">
+          <div class="grid_item">
             Усть-Цильма<br>
             заповедная  
           </div>
-          <div class="grid-item">
+          <div class="grid_item">
             Главная
           </div>
-          <div class="grid-item">
+          <div class="grid_item">
             Рукописное наследние<br>
             Русского Севера
           </div>
-          <div class="grid-item">
+          <div class="grid_item">
             Виртуальная<br>
             экспозиция<br>
             "Усть-Цильма"
           </div>
-          <div class="grid-item">
-            О проекте
+          <div class="grid_item">
+            <div class="grid_iten-content">
+              О проекте
+            </div>
           </div>
-          <div class="grid-item">
+          <div class="grid_item">
             Виртуальная<br>
             экспозиция<br>
             "Старообрядческий<br>
@@ -87,32 +89,19 @@ export default {
 
 <style scoped>
 .full_screen_menu {
-  position: absolute;
+  position: relative;
+  height: 0px;
+}
+
+.full_screen_menu.active {
   overflow: hidden;
-  z-index: 110;
-  width: 100%;
-  height: 100%;
+  z-index: 101;
+  width: 100vw;
+  height: 100vh;
 }
 
 .full_screen_menu canvas {
   position: absolute;
-}
-
-.full_screen_menu-grid {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 33% 34% 33%;
-  grid-template-rows: 33% 34% 33%;
-  justify-items: center;
-  align-items: center;
-  transition: 0.3s;
-  opacity: 0;
-}
-
-.full_screen_menu-grid.active {
-  opacity: 1;
 }
 
 .toggle_menu {
@@ -187,16 +176,74 @@ export default {
   left: 50%;
 }
 
-.full_screen_menu-grid .grid-item {
+.full_screen_menu-grid {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 33% 34% 33%;
+  grid-template-rows: 33% 34% 33%;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.full_screen_menu-grid.active {
+  opacity: 1;
+}
+
+.full_screen_menu-grid .grid_item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.8s;
   font-family: Romulc;
   font-size: 20px;
-  justify-self: center;
-  text-align: center;
-  align-self: center;
   color: #939393;
 }
 
-.full_screen_menu-grid .grid-item:hover {
+.full_screen_menu-grid .grid_item::after {
+  content: "";
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.full_screen_menu-grid .grid_item:nth-child(4)::after {
+  background-image: url("/static/img/fullscreenMenu/ust_cilma_zapovednaya.gif");
+}
+
+.full_screen_menu-grid .grid_item:nth-child(5)::after {
+  background-image: url("/static/img/fullscreenMenu/home.gif");
+}
+
+.full_screen_menu-grid .grid_item:nth-child(6)::after {
+  background-image: url("/static/img/fullscreenMenu/rukopisnoe-nasledie.gif");
+}
+
+.full_screen_menu-grid .grid_item:nth-child(7)::after {
+  background-image: url("/static/img/fullscreenMenu/virt_museum_ust_cilma.gif");
+}
+
+.full_screen_menu-grid .grid_item:nth-child(8)::after {
+  background-image: url("/static/img/fullscreenMenu/about_project.gif");
+}
+
+.full_screen_menu-grid .grid_item:nth-child(9)::after {
+  background-image: url("/static/img/fullscreenMenu/virt_museum_star_sborn.gif");
+}
+
+.full_screen_menu-grid .grid_item:hover::after {
+  opacity: 0.9;
+}
+
+.full_screen_menu-grid .grid_item:hover {
   cursor: pointer;
   transition: 0.3s;
   color: #ccc;

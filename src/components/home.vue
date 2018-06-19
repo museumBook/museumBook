@@ -253,6 +253,7 @@ export default {
 <style scoped>
 .home {
   position: absolute;
+  top: 0px;
   overflow: hidden;
   width: 100%;
   height: 100%;
