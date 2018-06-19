@@ -72,7 +72,6 @@ export default {
       }
     },
     toggle_menu: function(e) {
-      console.log(e.currentTarget.className);
       if (e.currentTarget.className == "toggle_menu") {
         e.currentTarget.className = "toggle_menu open";
         this.$store.commit("ch_visible_blackout", true);
