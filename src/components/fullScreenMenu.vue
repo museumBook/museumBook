@@ -211,6 +211,7 @@ export default {
   left: 0px;
   right: 0px;
   transition: 0.4s;
+  background-position: center;
   z-index: -1;
 }
 

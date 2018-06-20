@@ -27,6 +27,9 @@
         <img id="home-room_1" src="/static/img/homePage/room1.gif">
         <img id="home-room_2" src="/static/img/homePage/room2.gif">
       </div>
+      <!-- <div class="horses" id="horses">
+        <img id="hourses-img" src="/static/img/homePage/horses.gif">
+      </div> -->
       <div class="grandmothers" id=grandmothers>
         <img id="grandmothers-img" src='/static/img/homePage/grandmothers.gif'>
       </div>
