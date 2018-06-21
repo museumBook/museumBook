@@ -27,11 +27,11 @@
         <img id="home-room_1" src="/static/img/homePage/room1.gif">
         <img id="home-room_2" src="/static/img/homePage/room2.gif">
       </div>
-      <!-- <div class="horses" id="horses">
-        <img id="hourses-img" src="/static/img/homePage/horses.gif">
-      </div> -->
-      <div class="grandmothers" id=grandmothers>
-        <img id="grandmothers-img" src='/static/img/homePage/grandmothers.gif'>
+      <div class="horses" id="horses">
+        <img id="horses-img" class="hidden-horse" src="/static/img/homePage/horses.gif">
+      </div>
+      <div class="grandmothers" id="grandmothers">
+        <img id="grandmothers-img" class="hidden-grandmother" src='/static/img/homePage/grandmothers.gif'>
       </div>
     </div>
     <video id="video" class="display-none" muted>
@@ -88,7 +88,7 @@ export default {
     self.height = window.innerHeight;
     self.stage = 1;
     self.video.play();
-    self.audio.play();
+    // self.audio.play();
     self.resize();
 
     self.video.addEventListener(
@@ -146,13 +146,24 @@ export default {
   methods: {
     init: function() {
       setTimeout(() => {
-        setInterval(() => {
-          document.getElementById("grandmothers-img").className =
-            "grandmothers-img emergence-grandmother";
-          setTimeout(() => {
+        setTimeout(() => {
+          setInterval(() => {
             document.getElementById("grandmothers-img").className =
-              "grandmothers-img hidden-grandmother";
-          }, 2200);
+              "grandmothers-img emergence-grandmother";
+            setTimeout(() => {
+              document.getElementById("grandmothers-img").className =
+                "grandmothers-img hidden-grandmother";
+            }, 2200);
+          }, 22000);
+        }, 11000);
+
+        setInterval(() => {
+          document.getElementById("horses-img").className =
+            "horses-img emergence-horse";
+          setTimeout(() => {
+            document.getElementById("horses-img").className =
+              "horses-img hidden-horse";
+          }, 11000);
         }, 22000);
 
         setTimeout(() => {
@@ -248,6 +259,13 @@ export default {
         this.width_offset + "px";
       document.getElementById("grandmothers-img").style.height =
         this.max_height * 900 / 1080 + "px";
+
+      document.getElementById("horses").style.top =
+        this.max_height * 460 / 1080 + this.height_offset + "px";
+      document.getElementById("horses").style.left = this.width_offset + "px";
+      document.getElementById("horses-img").style.width = this.max_width + "px";
+      document.getElementById("horses-img").style.height =
+        this.max_height * 322 / 1080 + "px";
     }
   }
 };
@@ -324,6 +342,10 @@ export default {
   opacity: 0;
 }
 
+.horses {
+  position: absolute;
+}
+
 .emergence-load-home {
   animation-name: emergence-opacity-essence;
   animation-duration: 1s;
@@ -345,14 +367,16 @@ export default {
   animation-fill-mode: forwards;
 }
 
-.emergence-grandmother {
+.emergence-grandmother,
+.emergence-horse {
   animation-name: emergence-opacity-essence;
   animation-direction: 0.3s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
 }
 
-.hidden-grandmother {
+.hidden-grandmother,
+.hidden-horse {
   animation-name: hidden-opacity-essence;
   animation-direction: 0.3s;
   animation-timing-function: ease;
