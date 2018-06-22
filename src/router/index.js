@@ -5,6 +5,8 @@ import hallOfText from "@/components/hallOfText";
 import hallOfIntro from "@/components/hallOfIntro";
 import hallOfLetter from "@/components/hallOfLetter";
 import hallOfEnding from "@/components/hallOfEnding";
+import ustCilma from "@/components/ustCilma";
+import starSbornic from "@/components/starSbornic";
 
 Vue.use(Router);
 
@@ -35,6 +37,16 @@ export default new Router({
       path: "/hallOfEnding",
       name: "hallOfEnding",
       component: hallOfEnding
+    },
+    {
+      path: "/ustCilma",
+      name: "ustCilma",
+      component: ustCilma
+    },
+    {
+      path: "/starSbornic",
+      name: "starSbornic",
+      component: starSbornic
     }
   ]
 });
