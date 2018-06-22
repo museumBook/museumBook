@@ -24,8 +24,8 @@
         </p>
       </div>
       <div class="home-rooms">
-        <img id="home-room_1" src="/static/img/homePage/room1.gif">
-        <img id="home-room_2" src="/static/img/homePage/room2.gif">
+        <img id="home-room_1" src="/static/img/homePage/room1.gif" v-on:click="$router.push('/ustCilma')">
+        <img id="home-room_2" src="/static/img/homePage/room2.gif" v-on:click="$router.push('/starSbornic')">
       </div>
       <div class="horses" id="horses">
         <img id="horses-img" class="hidden-horse" src="/static/img/homePage/horses.gif">
