@@ -11,24 +11,24 @@
           <div class="grid_item">
             <img v-on:click="ch_volume_of_music" src="/static/img/fullscreenMenu/equalizer.gif">
           </div>
-          <div class="grid_item">
+          <div class="grid_item" v-on:click="toggle_menu(); $router.push('/')">
             <img class="logo" src="/static/img/fullscreenMenu/marfa_ust_cilma.png">
           </div>
           <div class="grid_item">
             <img class="close" src="/static//icon/close.svg">
           </div>
-          <div class="grid_item">
+          <div class="grid_item" v-on:click="toggle_menu(); $router.push('/ustCilma')">
             Усть-Цильма<br>
             заповедная  
           </div>
-          <div class="grid_item">
+          <div class="grid_item" v-on:click="toggle_menu(); $router.push('/')">
             Главная
           </div>
-          <div class="grid_item">
+          <div class="grid_item" v-on:click="toggle_menu(); $router.push('/starSbornic')">
             Рукописное наследние<br>
             Русского Севера
           </div>
-          <div class="grid_item">
+          <div class="grid_item" v-on:click="toggle_menu(); $router.push('/hallOfIntro')">
             Виртуальная<br>
             экспозиция<br>
             "Усть-Цильма"
@@ -38,7 +38,7 @@
               О проекте
             </div>
           </div>
-          <div class="grid_item">
+          <div class="grid_item" v-on:click="toggle_menu(); $router.push('/hallCreatingFish')">
             Виртуальная<br>
             экспозиция<br>
             "Старообрядческий<br>
@@ -71,13 +71,14 @@ export default {
         audio.volume = this.$store.state.volume_of_music;
       }
     },
-    toggle_menu: function(e) {
-      if (e.currentTarget.className == "toggle_menu") {
-        e.currentTarget.className = "toggle_menu open";
+    toggle_menu: function() {
+      let toggle = document.getElementsByClassName("toggle_menu")[0];
+      if (toggle.className == "toggle_menu") {
+        toggle.className = "toggle_menu open";
         this.$store.commit("ch_visible_blackout", true);
         this.$store.commit("ch_visible_full_screen_menu", true);
       } else {
-        e.currentTarget.className = "toggle_menu";
+        toggle.className = "toggle_menu";
         this.$store.commit("ch_visible_blackout", false);
         this.$store.commit("ch_visible_full_screen_menu", false);
       }
@@ -104,7 +105,7 @@ export default {
 }
 
 .toggle_menu {
-  position: relative;
+  position: fixed;
   cursor: pointer;
   z-index: 1000;
   width: 30px;
@@ -176,7 +177,8 @@ export default {
 }
 
 .full_screen_menu-grid {
-  position: absolute;
+  position: fixed;
+  z-index: -1;
   top: 0px;
   width: 100%;
   height: 100%;

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <fullScreenMenu></fullScreenMenu> -->
     <div id="wrapper" class="wrapper">
       <canvas id="canvas-video" class="canvas-video"></canvas>
       <video id="video" class="display-none" muted>
@@ -46,8 +47,13 @@
 </template>
 
 <script>
+// import fullScreenMenu from "@/components/fullScreenMenu";
+
 export default {
   name: "hallOfIntro",
+  // components: {
+  //   fullScreenMenu
+  // },
   data() {
     return {
       video: {},
@@ -135,7 +141,7 @@ export default {
           if (e.button == 0) {
             if (!self.playing) self.video.play();
             self.enableAction = false;
-            document.getElementById('wrapper').style.cursor = 'default';
+            document.getElementById("wrapper").style.cursor = "default";
             self.stage++;
             if (self.stage <= self.videos.length - 1) {
               self.video.currentTime = self.videos[self.stage].start;
@@ -152,7 +158,7 @@ export default {
             if (self.videos[self.stage].onEnd == "loop") {
               e.target.currentTime = self.videos[self.stage].start;
               self.enableAction = true;
-              document.getElementById('wrapper').style.cursor = 'pointer';
+              document.getElementById("wrapper").style.cursor = "pointer";
             } else if (self.videos[self.stage].onEnd == "next") {
               self.stage++;
             } else if (self.videos[self.stage].onEnd == "nextRoom") {
@@ -166,12 +172,12 @@ export default {
           if (self.videos[self.stage].rewind_from) {
             if (e.target.currentTime >= self.videos[self.stage].rewind_from) {
               self.enableAction = true;
-              document.getElementById('wrapper').style.cursor = 'pointer';
+              document.getElementById("wrapper").style.cursor = "pointer";
             }
           }
           if (self.videos[self.stage].onEnd == "loop") {
             self.enableAction = true;
-            document.getElementById('wrapper').style.cursor = 'pointer';
+            document.getElementById("wrapper").style.cursor = "pointer";
           }
         },
         false

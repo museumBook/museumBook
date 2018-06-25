@@ -7,6 +7,7 @@ import hallOfLetter from "@/components/hallOfLetter";
 import hallOfEnding from "@/components/hallOfEnding";
 import ustCilma from "@/components/ustCilma";
 import starSbornic from "@/components/starSbornic";
+import hallCreatingFish from "@/components/hallCreatingFish";
 
 Vue.use(Router);
 
@@ -47,6 +48,11 @@ export default new Router({
       path: "/starSbornic",
       name: "starSbornic",
       component: starSbornic
+    },
+    {
+      path: "/hallCreatingFish",
+      name: "hallCreatingFish",
+      component: hallCreatingFish
     }
   ]
 });
