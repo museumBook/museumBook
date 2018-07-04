@@ -47,13 +47,13 @@
 </template>
 
 <script>
-// import fullScreenMenu from "@/components/fullScreenMenu";
+import fullScreenMenu from "@/components/fullScreenMenu";
 
 export default {
   name: "hallOfIntro",
-  // components: {
-  //   fullScreenMenu
-  // },
+  components: {
+    fullScreenMenu
+  },
   data() {
     return {
       video: {},
