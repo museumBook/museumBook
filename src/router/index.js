@@ -1,13 +1,17 @@
 import Vue from "vue";
 import Router from "vue-router";
 import home from "@/components/home";
-import hallOfText from "@/components/hallOfText";
-import hallOfIntro from "@/components/hallOfIntro";
-import hallOfLetter from "@/components/hallOfLetter";
-import hallOfEnding from "@/components/hallOfEnding";
-import ustCilma from "@/components/ustCilma";
-import starSbornic from "@/components/starSbornic";
-import hallCreatingFish from "@/components/hallCreatingFish";
+
+import heritage from "@/components/heritage/main";
+import heritage_hall_1 from "@/components/heritage/video_hall/1_hall";
+import heritage_hall_2 from "@/components/heritage/video_hall/2_hall";
+import heritage_hall_3 from "@/components/heritage/video_hall/3_hall";
+import heritage_hall_4 from "@/components/heritage/video_hall/4_hall";
+
+import ust_cilma from "@/components/ust_cilma/main";
+import ust_cilma_hall_1 from "@/components/ust_cilma/video_hall/1_hall";
+import ust_cilma_hall_2 from "@/components/ust_cilma/video_hall/2_hall";
+// import ust_cilma_hall_3 from "@/components/ust_cilma/video_hall/3_hall";
 
 Vue.use(Router);
 
@@ -20,39 +24,44 @@ export default new Router({
       component: home
     },
     {
-      path: "/hallOfText",
-      name: "hallOfText",
-      component: hallOfText
+      path: "/heritage",
+      name: "heritage",
+      component: heritage
     },
     {
-      path: "/hallOfIntro",
-      name: "hallOfIntro",
-      component: hallOfIntro
+      path: "/heritage/hall/1",
+      name: "heritage/hall/1",
+      component: heritage_hall_1
     },
     {
-      path: "/hallOfLetter",
-      name: "hallOfLetter",
-      component: hallOfLetter
+      path: "/heritage/hall/2",
+      name: "heritage/hall/2",
+      component: heritage_hall_2
     },
     {
-      path: "/hallOfEnding",
-      name: "hallOfEnding",
-      component: hallOfEnding
+      path: "/heritage/hall/3",
+      name: "heritage/hall/3",
+      component: heritage_hall_3
     },
     {
-      path: "/ustCilma",
-      name: "ustCilma",
-      component: ustCilma
+      path: "/heritage/hall/4",
+      name: "heritage/hall/4",
+      component: heritage_hall_4
     },
     {
-      path: "/starSbornic",
-      name: "starSbornic",
-      component: starSbornic
+      path: "/ust-cilma",
+      name: "ust_cilma",
+      component: ust_cilma
     },
     {
-      path: "/hallCreatingFish",
-      name: "hallCreatingFish",
-      component: hallCreatingFish
+      path: "/ust-cilma/hall/1",
+      name: "ust_cilma/hall/1",
+      component: ust_cilma_hall_1
+    },
+    {
+      path: "/ust-cilma/hall/2",
+      name: "ust_cilma/hall/2",
+      component: ust_cilma_hall_2
     }
   ]
 });

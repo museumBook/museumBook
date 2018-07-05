@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fullScreenMenu></fullScreenMenu>
+    <menu></menu>
     <div id="home" class="home">
       <canvas id="home-canvas_video" class="home-canvas_video"></canvas>
       <div id="home-quote_1">
@@ -24,14 +24,14 @@
         </p>
       </div>
       <div class="home-rooms">
-        <img id="home-room_1" src="/static/img/homePage/room1.gif" v-on:click="$router.push('/ustCilma')">
-        <img id="home-room_2" src="/static/img/homePage/room2.gif" v-on:click="$router.push('/starSbornic')">
+        <img id="home-room_1" src="/static/img/home/room1.gif" v-on:click="$router.push('/ust-cilma')">
+        <img id="home-room_2" src="/static/img/home/room2.gif" v-on:click="$router.push('/heritage')">
       </div>
       <div class="horses" id="horses">
-        <img id="horses-img" class="hidden-horse" src="/static/img/homePage/horses.gif">
+        <img id="horses-img" class="hidden-horse" src="/static/img/home/horses.gif">
       </div>
       <div class="grandmothers" id="grandmothers">
-        <img id="grandmothers-img" class="hidden-grandmother" src='/static/img/homePage/grandmothers.gif'>
+        <img id="grandmothers-img" class="hidden-grandmother" src='/static/img/home/grandmothers.gif'>
       </div>
     </div>
     <video id="video" class="display-none" muted>
@@ -44,11 +44,11 @@
 </template>
 
 <script>
-import fullScreenMenu from "@/components/fullScreenMenu";
+import menu from "@/components/menu";
 export default {
   name: "home",
   components: {
-    fullScreenMenu
+    menu
   },
   data() {
     return {
@@ -175,31 +175,25 @@ export default {
           document
             .getElementById("home-room_1")
             .addEventListener("mouseover", function(e) {
-              e.target.setAttribute(
-                "src",
-                "/static/img/homePage/room1hover.gif"
-              );
+              e.target.setAttribute("src", "/static/img/home/room1hover.gif");
             });
 
           document
             .getElementById("home-room_1")
             .addEventListener("mouseleave", function(e) {
-              e.target.setAttribute("src", "/static/img/homePage/room1.gif");
+              e.target.setAttribute("src", "/static/img/home/room1.gif");
             });
 
           document
             .getElementById("home-room_2")
             .addEventListener("mouseover", function(e) {
-              e.target.setAttribute(
-                "src",
-                "/static/img/homePage/room2hover.gif"
-              );
+              e.target.setAttribute("src", "/static/img/home/room2hover.gif");
             });
 
           document
             .getElementById("home-room_2")
             .addEventListener("mouseleave", function(e) {
-              e.target.setAttribute("src", "/static/img/homePage/room2.gif");
+              e.target.setAttribute("src", "/static/img/home/room2.gif");
             });
         }, 1000);
       }, 8800);
