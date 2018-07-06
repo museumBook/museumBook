@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu></menu>
+    <main-menu></main-menu>
     <div id="home" class="home">
       <canvas id="home-canvas_video" class="home-canvas_video"></canvas>
       <div id="home-quote_1">
@@ -44,11 +44,11 @@
 </template>
 
 <script>
-import menu from "@/components/menu";
+import main_menu from "@/components/main_menu";
 export default {
   name: "home",
   components: {
-    menu
+    "main-menu": main_menu
   },
   data() {
     return {
@@ -117,11 +117,15 @@ export default {
       0
     );
 
-    window.addEventListener("resize", function(event) {
-      self.width = window.innerWidth;
-      self.height = window.innerHeight;
-      self.resize();
-    });
+    window.addEventListener(
+      "resize",
+      function(event) {
+        self.width = window.innerWidth;
+        self.height = window.innerHeight;
+        self.resize();
+      },
+      false
+    );
 
     self.video.addEventListener(
       "timeupdate",
