@@ -88,7 +88,7 @@ export default {
     self.height = window.innerHeight;
     self.stage = 1;
     self.video.play();
-    // self.audio.play();
+    self.audio.play();
     self.resize();
 
     self.video.addEventListener(
