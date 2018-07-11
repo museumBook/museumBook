@@ -1,0 +1,281 @@
+body 
+	{margin: 0; padding: 0;}
+
+.image,.image-, .imageonly, .go {
+	cursor:pointer;
+}
+
+ @font-face {
+font-family: "Romulc";  
+src: url("../fonts/Romulc.otf") format("truetype"); 
+font-style: normal; 
+font-weight: normal;
+ }
+  @font-face {
+font-family: "PFAgoraSansPro-Reg";  
+src: url("../fonts/Agora/Agora/Agora Sans Pro/PFAgoraSansPro-Reg.ttf") format("truetype"); 
+font-style: normal; 
+font-weight: normal;
+ }
+.block0 {  
+	z-index: 2; 
+	-webkit-filter: brightness(100) blur(5px);
+	position: absolute;
+	 display: none;
+   }
+
+.block1-1, .block1-2, .block1-3, .block1-4, .block1-6, .block1-8, .block2-1, .block2-2, .block2-3{  
+    float: left;
+	z-index: 5; 
+	position:absolute; 
+   }
+.block1-7, .block1-9, .block1-5, .block1-10, .block2-4{  
+    float: left;
+	z-index: 3; 
+	position:absolute; 
+   } 
+.block2-5{  
+    float: left;
+	z-index: 2; 
+	position:absolute; 
+   } 
+.fon1-12, .fon1-13 {  
+    float: left;
+	z-index: -1;
+	height:100%;
+	position:absolute; 
+	left: 0px;
+   }    
+.fon1-1, .fon1-2, .fon1-3, .fon1-5, .fon1-6, .fon1-7, .fon1-9, .fon1-10, .fon1-11, .fon1-14 {  
+    float: left;
+	z-index: 99; 
+	position:absolute; 
+	left: 0px;
+   } 
+.fon1-4, .fon1-8{  
+    float: left;
+	z-index: 4; 
+	position:absolute; 
+	left: 0px;
+   }
+ .fon1-0 { 
+    top:0px;
+	height: 100%;
+    background: #fc0; 
+    float: left; 
+    position:absolute
+    left: -8px; 
+	z-index: 1; 
+	left: 0;
+	top: 0;
+	border: none;
+   }
+ .fon2-1, .fon2-2, .fon2-3, .fon2-4{  
+	width: 100%;
+    float: left;
+	z-index: 4; 
+	position:absolute; 
+	left: 0px;
+   }
+ .fon2-0 { 
+    top:0px;
+	width: 100%;
+    background: #fc0; 
+    float: left; 
+    position:absolute
+    left: -8px; 
+	z-index: 1; 
+	left: 0;
+	top: 0;
+	border: none;
+   }
+.popup {
+	position: absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	cursor:pointer;
+	z-index:-10;
+}
+
+.popup_bg {
+	background:rgba(0,0,0,0.95);
+	position:fixed;
+	z-index:100;
+	height:200%;
+	width:100%;
+}
+.popup_info {
+	z-index:101;
+	background:rgb(45,47,44);
+	color: rgb(168, 170, 167);
+	position:fixed;
+	max-height:94%;
+	font-size: 17px;
+}
+.popup_logo {
+	z-index:101;
+	width:100%;
+	color: rgb(168, 170, 167);
+	font-family: "Romulc";
+	position: absolute; 
+	left:30px;
+	right:0;
+	top:150px;
+	bottom:0;
+	text-align: left;
+	max-width:75%;
+}
+
+.popup_logo_text {
+	color: rgb(168, 170, 167);
+	font-family: "Romulc";
+	position: absolute; 
+}
+
+.popup_text {
+	z-index:101;
+	width:100%;
+	color: rgb(222, 222, 222);
+	font-family:"PFAgoraSansPro-Reg";
+	font-size: 15px;
+	position: absolute; 
+	left:30px;
+	top: auto;
+	bottom:0;
+	text-align: left;
+}
+
+.popup_img {
+	position: fixed;
+    top: 0;
+    bottom: 0;
+	right:0;
+	left:0;
+	z-index:102;
+	max-height:94%;
+	max-width:94%;
+	pointer-events: none;
+}
+
+.hidescreen,
+.load_page {
+ position: fixed;
+ display: none; 
+}
+.hidescreen {
+ z-index: 9998; 
+ width: 100%;
+ height: 100%;
+ background: #000000;
+ left:0;
+ top:0;
+}
+.load_page {
+ z-index: 9999;
+ left: 50%;
+ top: 50%;
+ background: #ffffff;
+ padding: 30px 10px;
+ text-align: center;
+ font: normal normal 15px Verdana;
+ border-radius: 3px;
+ margin-left: -125px;
+ width: 250px;
+}
+.close { 
+ position: absolute;
+ top: 10px;
+ right: 10px; 
+ border: 1px solid #666; 
+ border-radius: 2px; 
+ font: normal bold 12px/14px Comic Sans MS; 
+ text-align: center; 
+ background: #FFF; 
+ color: #C00; 
+ cursor: pointer; 
+ height: 14px; 
+ width: 13px; 
+} 
+.close:hover { 
+ background: #C00; 
+ color: #FFF; 
+}
+
+.popup_only {
+	position: absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	display:none;
+	text-align:center;
+	cursor:pointer;
+	z-index:100;
+}
+
+.popup_only_bg {
+	background:rgba(0,0,0,0.95);
+	position:fixed;
+	z-index:100;
+	height:200%;
+	width:100%;
+}
+
+.popup_only_img {
+	position: fixed;
+    margin: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+	z-index:102;
+	max-height:94%;
+	max-width:94%;
+	pointer-events: none;
+}
+.popup_x {
+	position: absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	z-index:-11;
+}
+
+.popup_x_bg {
+	background:rgba(0,0,0,0.95);
+	position:fixed;
+	z-index:100;
+	height:200%;
+	width:100%;
+}
+
+.popup_x_img {
+	position: fixed;
+    top: 0;
+    bottom: 0;
+	right:0;
+	left:0;
+	z-index:102;
+	max-height:94%;
+	max-width:94%;
+	pointer-events: none;
+}
+
+.info {  
+	opacity: 0;
+	transition: 3s;
+	cursor:pointer;
+	z-index: 103;
+   } 
+ .info:hover {  
+	opacity: 1;
+   } 
+.info1-1,.info1-2,.info1-3,.info1-4,.info1-5,.info1-6,.info1-7,.info1-8,.info1-9,.info1-10,.info1-11{  
+    float: left; 
+	position:fixed; 
+	left: 0px;
+   } 
+   
