@@ -154,9 +154,6 @@ export default {
               case 3:
                 self.audio.currentTime = self.audios[3].start;
                 break;
-              case 4:
-                self.audio.currentTime = self.audios[3].start;
-                break;
             }
           }
         }
